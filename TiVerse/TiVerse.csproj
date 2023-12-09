@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="TiVerse.Application\" />
-    <Folder Include="TiVerse.Core\" />
   </ItemGroup>
 
 </Project>
