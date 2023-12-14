@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TiVerse.Core.Entity
 {
-    internal class UserRouteHistory
+    public class UserRouteHistory
     {
+        [Key]
         public Guid UserID { get; set; }
         public Guid TripID { get; set; }
         public string Route { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TiVerse.Core.Entity
 {
-    internal class Trip
+    public class Trip
     {
         public Guid TripID { get; set; }
         public string DeparturePoint { get; set; }
@@ -16,5 +16,17 @@ namespace TiVerse.Core.Entity
         public string Company { get; set; }
         public int Places { get; set; }
         public decimal TicketCost { get; set; }
+
+        public Trip (string departurePoint, string destinationPoint, DateTime date, string transport, string company, int places, decimal ticketCost)
+        {
+            TripID = Guid.NewGuid();
+            DeparturePoint = departurePoint;
+            DestinationPoint = destinationPoint;
+            Date = date;
+            Transport = transport;
+            Company = company;
+            Places = places;
+            TicketCost = ticketCost;
+        }
     }
 }
