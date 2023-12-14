@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse", "TiVerse\TiVerse.csproj", "{D067B586-DB52-481E-BB27-0D49FDBDDD4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Core", "TiVerse.Core\TiVerse.Core.csproj", "{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Application", "TiVerse.Application\TiVerse.Application.csproj", "{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Infrastructure", "TiVerse.Infrastructure\TiVerse.Infrastructure.csproj", "{8B3855ED-C54D-446B-8088-39F1214702D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Shared", "TiVerse.Shared\TiVerse.Shared.csproj", "{A8E11D74-8A52-4469-8D8E-00DED6978244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.WebUI", "TiVerse.WebUI\TiVerse.WebUI.csproj", "{3479A934-384F-4F16-8ED5-F40772F6A9FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D067B586-DB52-481E-BB27-0D49FDBDDD4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D067B586-DB52-481E-BB27-0D49FDBDDD4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D067B586-DB52-481E-BB27-0D49FDBDDD4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D067B586-DB52-481E-BB27-0D49FDBDDD4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B3855ED-C54D-446B-8088-39F1214702D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B3855ED-C54D-446B-8088-39F1214702D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B3855ED-C54D-446B-8088-39F1214702D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B3855ED-C54D-446B-8088-39F1214702D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E11D74-8A52-4469-8D8E-00DED6978244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E11D74-8A52-4469-8D8E-00DED6978244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E11D74-8A52-4469-8D8E-00DED6978244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E11D74-8A52-4469-8D8E-00DED6978244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
