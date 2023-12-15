@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TiVerse.WebUI</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TiVerse.WebUI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="~/scss/stylesheet.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-container">
+
+                <div class="first-section">
+                    <a asp-controller="" asp-action="">
+                        <div class="first-section__icon">
+                            <i class="fa-solid fa-truck-plane"></i>
+                        </div>
+                        <div class="first-section__text">TiVerse</div>
+                    </a>
+                </div>
+
+                <div class="second-section">
+                    <a asp-controller="MainPage" asp-action="Index">Автобус</a>
+                    <a asp-controller="Customers" asp-action="Index">Потяг</a>
+                    <a asp-controller="Suppliers" asp-action="Index">Літак</a>
+                </div>
+
+                <div class="third-section">
+                    <nav class="third-section__nav">
+                        <a asp-controller="" asp-action="">
+                            <div class="third-section__icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>Профіль</div>
+                        </a>
+                        <a asp-controller="" asp-action="">
+                            <div class="third-section__icon">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </div>
+                            <div class="third-section__text">Вихід</div>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="body-container">
+            @RenderBody()
+        </div>
+
+        <footer class="footer">
+            <div class="footer__social-icons">
+                <a href="https://uk-ua.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://twitter.com/?lang=ru"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></i></a>
+            </div>
+
+            <div class="footer-navbar">
+                <ul class="footer-navbar__list">
+                    <li><a href="#" class="footer-navbar__list-link">Правила</a></li>
+                    <li><a href="#" class="footer-navbar__list-link">Підтримка</a></li>
+                    <li><a href="#" class="footer-navbar__list-link">Політика конфіденційності</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__info">
+                <p>&copy;Tymofii Khomych</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

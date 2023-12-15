@@ -45,7 +45,9 @@ namespace TiVerse.WebUI
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                // controllers: Home MainPage
+                // actions: Index(Home) 
+                pattern: "{controller=MainPage}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();
