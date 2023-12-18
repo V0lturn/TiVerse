@@ -1,0 +1,58 @@
+﻿@import "../common/_skin.scss";
+
+.mainpage-title {
+    font-size: 24px;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.mainpage-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        background-color: $color-light;
+        margin: 20px;
+        padding: 5px;
+        border-radius: 5px;
+
+        &-text {
+            font-size: 20px;
+        }
+
+        &-input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: $color-primary;
+            border-bottom: 1px solid $color-light-grey;
+            width: max-content;
+        }
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70px;
+        width: 200px;
+        background-color: $color-primary;
+        color: $color-light;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+
+        &:hover {
+            filter: brightness(90%);
+        }
+    }
+}

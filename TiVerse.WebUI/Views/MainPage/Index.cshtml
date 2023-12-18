@@ -4,7 +4,24 @@
 }
 
 <div>
-    <h1>
-      bla bla bla
-    </h1>
+    <div class="mainpage-title"><h1>Пошук квитків онлайн</h1></div>
+
+    <form class="mainpage-form">
+        <div class="mainpage-form__group">
+            <label class="mainpage-form__group-text" for="from">Звідки:</label>
+            <input class="mainpage-form__group-input" type="text" id="from" name="from" required>
+        </div>
+
+        <div class="mainpage-form__group">
+            <label class="mainpage-form__group-text" for="to">Куди:</label>
+            <input class="mainpage-form__group-input" type="text" id="to" name="to" required>
+        </div>
+
+        <div class="mainpage-form__group">
+            <label class="mainpage-form__group-text" for="date">Коли:</label>
+            <input class="mainpage-form__group-input" type="date" id="date" name="date" required>
+        </div>
+
+        <input class="mainpage-form__button" type="submit" value="Пошук">
+    </form>
 </div>
