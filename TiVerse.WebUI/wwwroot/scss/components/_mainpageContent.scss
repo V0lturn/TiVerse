@@ -1,5 +1,13 @@
 ﻿@import "../common/_skin.scss";
 
+.mainpage-container {
+    width: 50%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    margin: 20px auto;
+}
+
 .mainpage-title {
     font-size: 24px;
 

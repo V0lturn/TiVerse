@@ -25,6 +25,16 @@ a {
   color: #000000;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  position: relative;
+}
+
 .header-container {
   background-color: #ffffff;
   padding: 0;
@@ -37,6 +47,8 @@ a {
 
 .first-section {
   margin-left: 15px;
+  border: solid 2px #000000;
+  border-radius: 40px;
 }
 
 .third-section {
@@ -83,15 +95,7 @@ a {
 }
 
 .body-container {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   flex: 1;
-  width: 50%;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
 }
 
 .footer {
@@ -99,7 +103,7 @@ a {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+  position: relative;
   width: 100%;
   bottom: 0;
   font-size: 19px;
@@ -137,6 +141,14 @@ a {
   content: "•";
   margin-right: 5px;
   color: #000000;
+}
+
+.mainpage-container {
+  width: 50%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  margin: 20px auto;
 }
 
 .mainpage-title {
@@ -188,4 +200,56 @@ a {
 }
 .mainpage-form__button:hover {
   filter: brightness(90%);
+}
+
+.bus-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  margin: 20px auto;
+  margin-bottom: 150px;
+}
+
+.route-block {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  align-items: stretch;
+  border-radius: 10px;
+  min-height: 150px;
+}
+.route-block__details {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 20px;
+}
+
+.buyLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #32CD32;
+  border-radius: 5px;
+  width: 150px;
+  height: 70px;
+}
+.buyLink-text {
+  font-size: 14px;
+}
+.buyLink-price {
+  font-size: 18px;
+  font-weight: bold;
 }

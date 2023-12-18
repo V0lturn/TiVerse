@@ -1,5 +1,14 @@
 ﻿@import "../common/_skin.scss";
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    position: relative;
+}
 .header-container {
     background-color: $color-light;
 
@@ -14,10 +23,8 @@
 
 .first-section {
     margin-left: 15px;
-}
-
-.second-section {
-
+    border: solid 2px $color-dark;
+    border-radius: 40px;
 }
 
 .third-section {
