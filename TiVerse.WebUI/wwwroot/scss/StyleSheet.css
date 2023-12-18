@@ -202,7 +202,7 @@ a {
   filter: brightness(90%);
 }
 
-.bus-container {
+.route-container {
   display: flex;
   justify-content: center;
   align-items: center;

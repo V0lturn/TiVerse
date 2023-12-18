@@ -1,6 +1,6 @@
 ﻿@import "../common/_skin.scss";
 
-.bus-container {
+.route-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@
     border-radius: 20px;
     margin: 20px auto;
     margin-bottom: 150px;
-}
+}   
 
 .route-block {
     display: flex;

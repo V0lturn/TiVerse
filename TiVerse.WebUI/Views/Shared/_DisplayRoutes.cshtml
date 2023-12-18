@@ -1,0 +1,29 @@
+﻿<div class="route-container">
+    @foreach (var item in Model)
+    {
+        <div class="route-block">
+            <div class="route-block__details">
+                <span>З міста:</span>
+                <span class="route-block__details-text">@item.DeparturePoint</span>
+            </div>
+            <div class="route-block__details">
+                <span>В місто:</span>
+                <span class="route-block__details-text">@item.DestinationPoint</span>
+            </div>
+            <div class="route-block__details">
+                <span>Дата відправки:</span>
+                <span class="route-block__details-text">@item.Date</span>
+            </div>
+            <div class="route-block__details">
+                <span>Кількість місць:</span>
+                <span class="route-block__details-text">@item.Places</span>
+            </div>
+            <div class="route-block__details">
+                <a class="route-block__details-buylink" href="#">
+                    <span>купити за</span>
+                    <span class="route-block__details-text">@item.TicketCost</span>
+                </a>
+            </div>
+        </div>
+    }
+</div>
