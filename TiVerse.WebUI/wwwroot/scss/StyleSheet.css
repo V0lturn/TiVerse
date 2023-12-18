@@ -228,28 +228,27 @@ a {
 .route-block__details {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
   justify-content: center;
   align-items: center;
   flex: 1;
+  padding: 0 10px;
   font-size: 20px;
 }
-
-.buyLink {
+.route-block__details-text {
+  font-weight: bold;
+}
+.route-block__details-buylink {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1;
   color: white;
   background-color: #32CD32;
   border-radius: 5px;
   width: 150px;
-  height: 70px;
+  max-height: 80px;
 }
-.buyLink-text {
-  font-size: 14px;
-}
-.buyLink-price {
-  font-size: 18px;
-  font-weight: bold;
+.route-block__details-buylink:hover {
+  filter: brightness(90%);
 }

@@ -19,38 +19,38 @@
     width: 60%;
     margin-bottom: 10px;
     background-color: $color-light;
-    align-items: stretch; 
+    align-items: stretch;
     border-radius: 10px;
     min-height: 150px;
 
     &__details {
         display: flex;
         flex-direction: column;
-        padding: 0 10px;
         justify-content: center;
         align-items: center;
-        flex: 1; 
+        flex: 1;
+        padding: 0 10px;
         font-size: 20px;
-    }
-}
 
-.buyLink {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #32CD32;
-    border-radius: 5px;
-    width: 150px;
-    height: 70px;
+        &-text {
+            font-weight: bold;
+        }
 
-    &-text {
-        font-size: 14px;
-    }
+        &-buylink {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            color: white;
+            background-color: #32CD32;
+            border-radius: 5px;
+            width: 150px;
+            max-height: 80px;
 
-    &-price {
-        font-size: 18px;
-        font-weight: bold;
+            &:hover {
+                filter: brightness(90%);
+            }
+        }
     }
 }

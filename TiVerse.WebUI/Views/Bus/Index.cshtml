@@ -6,30 +6,30 @@
 @model List<TiVerse.Core.Entity.Trip>;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div class="bus-container">     
+<div class="bus-container">
     @foreach (var item in Model)
     {
         <div class="route-block">
             <div class="route-block__details">
-                <span class="route-block__details-text">З міста:</span>
-                <span>@item.DeparturePoint</span>
+                <span>З міста:</span>
+                <span class="route-block__details-text">@item.DeparturePoint</span>
             </div>
             <div class="route-block__details">
                 <span>В місто:</span>
-                <span>@item.DestinationPoint</span>
+                <span class="route-block__details-text">@item.DestinationPoint</span>
             </div>
             <div class="route-block__details">
                 <span>Дата відправки:</span>
-                <span>@item.Date</span>
+                <span class="route-block__details-text">@item.Date</span>
             </div>
             <div class="route-block__details">
                 <span>Кількість місць:</span>
-                <span>@item.Places</span>
+                <span class="route-block__details-text">@item.Places</span>
             </div>
             <div class="route-block__details">
-                <a class="buyLink" href="#">
-                    <div class="buyLink-text">купити за</div>
-                    <div class="buyLink price">@item.TicketCost</div>
+                <a class="route-block__details-buylink" href="#">
+                    <span>купити за</span>
+                    <span class="route-block__details-text">@item.TicketCost</span>
                 </a>
             </div>
         </div>
