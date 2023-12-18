@@ -9,13 +9,6 @@ namespace TiVerse.Core.Entity
 {
     public class Location
     {
-        [Key]
-        public string City { get; set; }
-        public string Country { get; set; }
-        public bool BusStation { get; set; }
-        public bool RailwayStation { get; set; }
-        public bool Airport { get; set; }
-
         public Location(string city, string country, bool busStation, bool railwayStation, bool airport) 
         {
             City = city;
@@ -24,5 +17,12 @@ namespace TiVerse.Core.Entity
             RailwayStation = railwayStation;
             Airport = airport;
         }
+
+        [Key]
+        public string City { get; set; }
+        public string Country { get; set; }
+        public bool BusStation { get; set; }
+        public bool RailwayStation { get; set; }
+        public bool Airport { get; set; }
     }
 }
