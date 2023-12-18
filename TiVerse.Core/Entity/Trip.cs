@@ -17,6 +17,13 @@ namespace TiVerse.Core.Entity
         public int Places { get; set; }
         public decimal TicketCost { get; set; }
 
+        public Trip() 
+        {
+            DeparturePoint = string.Empty;
+            DestinationPoint = string.Empty;
+            Transport = string.Empty;
+            Company = string.Empty;
+        }
         public Trip (string departurePoint, string destinationPoint, DateTime date, string transport, string company, int places, decimal ticketCost)
         {
             TripID = Guid.NewGuid();
