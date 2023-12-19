@@ -29,10 +29,32 @@
         margin: 20px;
         padding: 5px;
         border-radius: 5px;
+        min-height: 110px;
 
         &-text {
             font-size: 20px;
         }
+
+        &-select {
+            border: none;
+            outline: none;
+            padding: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: $color-primary;
+            border-bottom: 1px solid $color-light-grey;
+            width: max-content;
+            background-color: $color-light;
+            border-radius: 5px; 
+
+            option {
+                background-color: $color-light; 
+                color: $color-dark; 
+                font-size: 16px; 
+                border-radius: 5px; 
+            }
+        }
+
 
         &-input {
             border: none;

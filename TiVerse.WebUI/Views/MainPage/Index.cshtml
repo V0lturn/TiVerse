@@ -6,22 +6,31 @@
 <div class="mainpage-container">
     <h1 class="mainpage-title">Пошук квитків онлайн</h1>
 
-    <form class="mainpage-form">
+    <form class="mainpage-form" asp-controller="MainPage" asp-action="FindRoutes" method="post">
         <div class="mainpage-form__group">
             <label class="mainpage-form__group-text" for="from">Звідки:</label>
-            <input class="mainpage-form__group-input" type="text" id="from" name="from" required>
+            <input class="mainpage-form__group-input" type="text" id="from" name="Departure" required>
         </div>
 
         <div class="mainpage-form__group">
             <label class="mainpage-form__group-text" for="to">Куди:</label>
-            <input class="mainpage-form__group-input" type="text" id="to" name="to" required>
+            <input class="mainpage-form__group-input" type="text" id="to" name="Destination" required>
         </div>
 
         <div class="mainpage-form__group">
             <label class="mainpage-form__group-text" for="date">Коли:</label>
-            <input class="mainpage-form__group-input" type="date" id="date" name="date" required>
+            <input class="mainpage-form__group-input" type="date" id="date" name="Date" required>
         </div>
 
+        <div class="mainpage-form__group">
+            <label class="mainpage-form__group-text" for="date">Транспорт:</label>
+            <select class="mainpage-form__group-select" id="transport" name="Transport">
+                <option value="" selected>Будь-що</option>
+                <option value="bus">Автобус</option>
+                <option value="train">Потяг</option>
+                <option value="plane">Літак</option>
+            </select>
+        </div>
         <input class="mainpage-form__button" type="submit" value="Пошук">
     </form>
 </div>

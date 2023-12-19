@@ -171,9 +171,28 @@ a {
   margin: 20px;
   padding: 5px;
   border-radius: 5px;
+  min-height: 110px;
 }
 .mainpage-form__group-text {
   font-size: 20px;
+}
+.mainpage-form__group-select {
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6495ED;
+  border-bottom: 1px solid #D3D3D3;
+  width: max-content;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.mainpage-form__group-select option {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  border-radius: 5px;
 }
 .mainpage-form__group-input {
   border: none;

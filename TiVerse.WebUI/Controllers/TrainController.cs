@@ -28,6 +28,7 @@ namespace TiVerse.WebUI.Controllers
                 .ToListAsync();
 
             var trainRoutesToDTO = _mapper.Map<List<RouteDTO>>(trainRoutes);
+
             return View("Index", trainRoutesToDTO);
         }
     }
