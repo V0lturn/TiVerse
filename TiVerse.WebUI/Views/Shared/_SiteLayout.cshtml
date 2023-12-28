@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/TiVerse.WebUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="~/scss/stylesheet.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
     <div class="wrapper">
@@ -24,31 +27,44 @@
                 </div>
 
                 <div class="second-section">
-                    <a asp-controller="Bus" asp-action="Index">Автобус</a>
-                    <a asp-controller="Train" asp-action="Index">Потяг</a>
-                    <a asp-controller="Plane" asp-action="Index">Літак</a>
-                </div>
+                    <div class="second-section__block">
+                        <select id="second-section__transport-selector" class="second-section__selector">
+                            <option value="" disabled selected hidden>Транспорт</option>
+                            <option value="Bus">Автобус</option>
+                            <option value="Train">Потяг</option>
+                            <option value="Plane">Літак</option>
+                        </select>
+                    </div>
 
-                <div class="third-section">
-                    <nav class="third-section__nav">
-                        <a asp-controller="" asp-action="">
-                            <div class="third-section__icon">
+                    <div class="second-section__language-selector second-section__block">
+                        <select id="second-section__language-selector" class="second-section__selector">
+                            <option value="Ukrainian" selected>Укр</option>
+                            <option value="English">Eng</option>
+                        </select>
+                    </div>
+                    
+                    <div class="second-section__block">
+                        <a asp-controller="Account" asp-action="Index">
+                            <div class="second-section__icon">
                                 <i class="fa-solid fa-user"></i>
                             </div>
-                            <div>Профіль</div>
+                            <div class="second-section__text">Профіль</div>
                         </a>
+                    </div>
+                    
+                    <div class="second-section__block">
                         <a asp-controller="" asp-action="">
-                            <div class="third-section__icon">
+                            <div class="second-section__icon">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </div>
-                            <div class="third-section__text">Вихід</div>
+                            <div class="second-section__text">Вихід</div>
                         </a>
-                    </nav>
+                    </div>              
                 </div>
             </div>
         </header>
 
-        <div class="body-container">
+        <div class="maincontent">
             @RenderBody()
         </div>
 
@@ -73,5 +89,25 @@
         </footer>
     </div>
 </body>
-
 </html>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#second-section__transport-selector').change(function () {
+            var selectedTransport = $(this).val();
+
+            $.ajax({
+                url: '/MainPage/FindRoutesByTransport',
+                type: 'GET',
+                data: { Transport: selectedTransport },
+                success: function (data) {
+                    $('.maincontent').html(data);
+                },
+                error: function () {
+                    console.log('Error occurred while fetching data.');
+                }
+            });
+        });
+    });
+</script>

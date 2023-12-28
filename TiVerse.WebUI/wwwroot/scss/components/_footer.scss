@@ -1,21 +1,24 @@
 ﻿@import "../common/_skin.scss";
 
 .footer {
+    grid-area: footer;
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-    font-size: 19px;
-    background-color: $color-light-grey;
-    color: $color-light;
+    font-size: 16px;
+    background-color: $color-lightblue;
+    color: $color-text;
     opacity: .7;
 
     &__social-icons a {
         padding: 0px 10px;
-        color: $color-primary;
+        font-size: 20px;
+        color: $color-text;
+
+        &:hover {
+            color: $color-focus;
+        }
     }
 
     &__info p {
@@ -31,7 +34,6 @@
     }
 
     &-navbar {
-
         &__list {
             padding: 0;
             margin: 0;
@@ -43,12 +45,16 @@
 
             &-link {
                 font-size: 14px;
-                color: $color-dark;
+                color: $color-text;
+
+                &:hover {
+                    color: $color-focus;
+                }
 
                 &:before {
                     content: '\2022';
                     margin-right: 5px;
-                    color: $color-dark;
+                    color: $color-text;
                 }
             }
         }

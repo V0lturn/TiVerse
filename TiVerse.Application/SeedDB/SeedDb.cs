@@ -58,7 +58,7 @@ namespace TiVerse.Application.SeedDB
                 {
                     if (departureCity != destinationCity)
                     {
-                        var numberOfTrips = random.Next(1, 4);
+                        var numberOfTrips = random.Next(1, 15);
 
                         for (int i = 0; i < numberOfTrips; i++)
                         {
@@ -67,7 +67,7 @@ namespace TiVerse.Application.SeedDB
                             var transport = transportOptions[random.Next(0, transportOptions.Count)];
                             var company = "Any Company: " + random.Next(0, 10).ToString();
                             var places = random.Next(50, 200);
-                            var ticketCost = Math.Round((decimal)random.NextDouble() * 500, 2);
+                            var ticketCost = Math.Round((decimal)(random.Next(300, 801)), 2);
 
                             if (ukraineCities[departureCity] != ukraineCities[destinationCity])
                             {
@@ -85,7 +85,7 @@ namespace TiVerse.Application.SeedDB
             {
                 foreach (var destinationCity in otherCountries.Keys)
                 {
-                    var numberOfTrips = random.Next(1, 4); 
+                    var numberOfTrips = random.Next(1, 7); 
 
                     for (int i = 0; i < numberOfTrips; i++)
                     {
@@ -93,7 +93,7 @@ namespace TiVerse.Application.SeedDB
                         var transport = "Plane"; 
                         var company = "Any Company";
                         var places = random.Next(50, 200);
-                        var ticketCost = Math.Round((decimal)random.NextDouble() * 500, 2);
+                        var ticketCost = Math.Round((decimal)(random.Next(1000, 5001)), 2);
 
                         var trip = new Trip(departureCity, destinationCity, date, transport, company, places, ticketCost);
                         trips.Add(trip);

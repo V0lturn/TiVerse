@@ -3,34 +3,118 @@
     Layout = "_SiteLayout";
 }
 
-<div class="mainpage-container">
+<div class="mainpage-container maincontent">
     <h1 class="mainpage-title">Пошук квитків онлайн</h1>
 
-    <form class="mainpage-form" asp-controller="MainPage" asp-action="FindRoutes" method="post">
+    <form class="mainpage-form" asp-controller="MainPage" asp-action="FindSpecificRoute" method="post">
         <div class="mainpage-form__group">
-            <label class="mainpage-form__group-text" for="from">Звідки:</label>
-            <input class="mainpage-form__group-input" type="text" id="from" name="Departure" required>
-        </div>
+            <div class="mainpage-form__group-block">
+                <label class="mainpage-form__group-text" for="from">Звідки:</label>
+                <input class="mainpage-form__group-input" type="text" id="from" name="Departure" required>
+            </div>
 
-        <div class="mainpage-form__group">
-            <label class="mainpage-form__group-text" for="to">Куди:</label>
-            <input class="mainpage-form__group-input" type="text" id="to" name="Destination" required>
-        </div>
+            <div class="mainpage-form__group-block">
+                <label class="mainpage-form__group-text" for="to">Куди:</label>
+                <input class="mainpage-form__group-input" type="text" id="to" name="Destination" required>
+            </div>
 
-        <div class="mainpage-form__group">
-            <label class="mainpage-form__group-text" for="date">Коли:</label>
-            <input class="mainpage-form__group-input" type="date" id="date" name="Date" required>
-        </div>
+            <div class="mainpage-form__group-block">
+                <label class="mainpage-form__group-text" for="date">Коли:</label>
+                <input class="mainpage-form__group-input" type="date" id="date" name="Date" required>
+            </div>
 
-        <div class="mainpage-form__group">
-            <label class="mainpage-form__group-text" for="date">Транспорт:</label>
-            <select class="mainpage-form__group-select" id="transport" name="Transport">
-                <option value="" selected>Будь-що</option>
-                <option value="bus">Автобус</option>
-                <option value="train">Потяг</option>
-                <option value="plane">Літак</option>
-            </select>
+            <div class="mainpage-form__group-block">
+                <label class="mainpage-form__group-text" for="date">Транспорт:</label>
+                <select class="mainpage-form__group-select" id="transport" name="Transport">
+                    <option value="" selected>Будь-що</option>
+                    <option value="bus">Автобус</option>
+                    <option value="train">Потяг</option>
+                    <option value="plane">Літак</option>
+                </select>
+            </div>     
         </div>
         <input class="mainpage-form__button" type="submit" value="Пошук">
     </form>
 </div>
+
+<div class="image-container">
+    <div class="image-container__wrapper">
+        <img class="image-container__wrapper-photo" src="~/Images/mainpage_slider_img1.png" alt="Image 1" />
+    </div>
+
+    <div class="image-container__wrapper">
+        <img class="image-container__wrapper-photo" src="~/Images/mainpage_slider_img3.png" alt="Image 3" />
+    </div>
+</div>
+
+<div class="routes-container">
+    <div class="routes-container__local">      
+        @{
+            var ukraine_routes = ViewData["InUkraine"] as List<TiVerse.Application.DTO.TopRoutesDTO>;
+            if (ukraine_routes != null && ukraine_routes.Any())
+            {
+                foreach (var route in ukraine_routes)
+                {
+                    <a class="routes-container__link" data-url="@Url.Action("FindAllRoutes", "MainPage", new { Departure = route.DeparturePoint, Destination = route.DestinationPoint })">
+                        <div class="route">
+                            <div class="route-points">
+                                <div><span>@route.DeparturePoint</span></div>
+                                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div><span>@route.DestinationPoint</span></div>
+                            </div>
+                            <div class="route-price">
+                            <span>від @route.MinPrice &#8372</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+         
+            }
+        }
+    </div>
+
+    <div class ="routes-container__foreign">
+        @{
+            var foreignn_routes = ViewData["FromUkraine"] as List<TiVerse.Application.DTO.TopRoutesDTO>;
+            if (foreignn_routes != null && foreignn_routes.Any())
+            {
+                foreach (var route in foreignn_routes)
+                {
+                    <a class="routes-container__link" data-url="@Url.Action("FindAllRoutes", "MainPage", new { Departure = route.DeparturePoint, Destination = route.DestinationPoint })">
+                        <div class="route">
+                            <div class="route-points">
+                                <div><span>@route.DeparturePoint</span></div>
+                                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div><span>@route.DestinationPoint</span></div>
+                            </div>
+                            <div class="route-price">
+                                <span>від @route.MinPrice &#8372</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        }
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.routes-container__link').on('click', function (e) {
+            e.preventDefault();
+
+            var url = $(this).data('url');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $('.maincontent').html(data);
+                },
+                error: function () {
+                    console.log('Error occurred while fetching data.');
+                }
+            });
+        });
+    });
+</script>

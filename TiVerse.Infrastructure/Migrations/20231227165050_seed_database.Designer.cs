@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TiVerse.Infrastructure.AppDbContext;
 
@@ -11,9 +12,11 @@ using TiVerse.Infrastructure.AppDbContext;
 namespace TiVerse.Infrastructure.Migrations
 {
     [DbContext(typeof(TiVerseDbContext))]
-    partial class TiVerseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231227165050_seed_database")]
+    partial class seed_database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

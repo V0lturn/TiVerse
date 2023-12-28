@@ -1,15 +1,23 @@
 ﻿@import "../common/_skin.scss";
 
 .mainpage-container {
-    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    padding-bottom: 70px;
 }
 
 .mainpage-title {
-    font-size: 24px;
+    font-family: 'Century Gothic';
+    font-size: 50px;
+    color: $color-focus;
 
     h1 {
         margin: 0;
@@ -24,15 +32,24 @@
 
     &__group {
         display: flex;
-        flex-direction: column;
-        background-color: $color-light;
-        margin: 20px;
+        flex-direction: row;
+        background-color: $color-lightblue;
         padding: 5px;
-        border-radius: 5px;
         min-height: 110px;
+        border-radius: 10px;
+        padding-bottom: 15px;
+
+        &-block {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0px 5px;
+        }
 
         &-text {
-            font-size: 20px;
+            color: $color-text;
+            font-size: 24px;
         }
 
         &-select {
@@ -41,20 +58,19 @@
             padding: 8px;
             font-size: 20px;
             font-weight: bold;
-            color: $color-primary;
-            border-bottom: 1px solid $color-light-grey;
+            color: $color-focus;
+            border-bottom: 1px solid $color-darkblue;
             width: max-content;
             background-color: $color-light;
-            border-radius: 5px; 
+            border-radius: 5px;
 
             option {
-                background-color: $color-light; 
-                color: $color-dark; 
-                font-size: 16px; 
-                border-radius: 5px; 
+                background-color: $color-lightblue;
+                color: $color-focus;
+                font-size: 20px;
+                border-radius: 5px;
             }
         }
-
 
         &-input {
             border: none;
@@ -62,8 +78,9 @@
             padding: 8px;
             font-size: 20px;
             font-weight: bold;
-            color: $color-primary;
-            border-bottom: 1px solid $color-light-grey;
+            color: $color-focus;
+            border-bottom: 1px solid $color-darkblue;
+            border-radius: 5px;
             width: max-content;
         }
     }
@@ -74,15 +91,86 @@
         align-items: center;
         height: 70px;
         width: 200px;
-        background-color: $color-primary;
-        color: $color-light;
+        background-color: $color-focus;
+        color: $color-text;
         font-size: 20px;
         font-weight: bold;
         border: none;
         border-radius: 20px;
+        margin-left: 20px;
 
         &:hover {
             filter: brightness(90%);
+        }
+    }
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin-top: 50px;
+
+    &__wrapper {
+        margin: 0 10px;
+
+        &-photo {
+            width: 600px;
+            height: auto;
+            display: block;
+            max-width: 100%;
+        }
+    }
+}
+
+.routes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 60%;
+
+    &__local,
+    &__foreign {
+        width: 40%;
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 10px;
+    }
+}
+
+.route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-lightblue;
+    padding: 10px;
+    font-size: 18px;
+
+    &:hover {
+        background-color: darken(rgba(255, 255, 255, 0.7), 10%);
+        border-radius: 5px;
+    }
+
+    &-points {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+
+    &-price {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        span {
+            font-weight: bold;
+            color: $color-focus;
         }
     }
 }

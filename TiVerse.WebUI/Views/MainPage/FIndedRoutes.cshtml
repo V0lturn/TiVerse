@@ -3,6 +3,13 @@
     Layout = "_SiteLayout";
 }
 
-@{
+@if (!ViewData.ContainsKey("Error"))
+{
     await Html.RenderPartialAsync("_DisplayRoutes");
+}
+else
+{
+    <div class="route-container">
+        <h1>@ViewData["Error"]</h1>
+    </div>
 }

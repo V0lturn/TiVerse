@@ -31,7 +31,7 @@ namespace TiVerse.Core.Entity
         public Guid TripID { get; set; }
         public string DeparturePoint { get; set; }
         public string DestinationPoint { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; }                                  // ПОМЕНЯТЬ НА DATEOFTRIP
         public string Transport { get; set; }
         public string Company { get; set; }
         public int Places { get; set; }

@@ -1,67 +1,79 @@
 ﻿@import "../common/_skin.scss";
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
 .header {
-    position: relative;
-}
-.header-container {
-    background-color: $color-light;
-
-    padding: 0;
-    margin: 0;
-
-    min-height: 100px;
+    grid-area: header;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    background-color: $color-darkblue;
+
+    &-container {
+        display: grid;
+        grid-template-areas:
+            "hdlogo hdnav hdnav";
+
+        min-width: 60%;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .first-section {
-    margin-left: 15px;
-    border: solid 2px $color-dark;
-    border-radius: 40px;
-}
+    grid-area: hdlogo;
 
-.third-section {
-    padding-right: 20px;
-
-    &__nav {
-        display: flex;
-        align-items: center;
-        color: $color-light;
-        gap: 20px;
+    &__text,
+    &__icon {
+        font-size: 26px;
     }
 }
 
-.first-section,
-.second-section,
-.third-section {
-    font-size: 24px;
-
-    a {
-        border-radius: 40px;
-        padding: 0px 30px;
-    }
-
-    a:hover {
-        background-color: $color-primary;
-        color: $color-light;
-    }
-}
-
-.first-section,
-.third-section {
+.second-section {
+    grid-area: hdnav;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    &__block {
+        margin-left: 40px;
+    }
+
+    &__selector {
+        font-size: 16px;
+        border: none;
+        background-color: $color-darkblue;
+        color: $color-text;
+
+        option {
+            font-size: 20px;
+        }
+    }
+
+    &__language-selector__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+}
+
+.first-section,
+.second-section {
+    padding: 10px 0px;
 
     a {
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        padding: 5px 10px;
+        border-radius: 40px;
+        color: $color-text;
+
+        &:hover {
+            background-color: lighten($color-darkblue, 10%);
+            color: $color-focus;
+        }
     }
 
     &__icon {
