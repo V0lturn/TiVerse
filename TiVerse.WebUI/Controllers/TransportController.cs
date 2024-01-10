@@ -14,6 +14,9 @@ namespace TiVerse.WebUI.Controllers
         private readonly IMapper _mapper;
         private readonly IRouteService _routeService;
 
+        const int firstPage = 1;
+        const int defaultPageSize = 50;
+
         public TransportController(IMapper mapper, IRouteService routeService)
         {
             _mapper = mapper;
@@ -22,7 +25,7 @@ namespace TiVerse.WebUI.Controllers
 
         public async Task<IActionResult> Index(string Transport)
         {
-            var routes = await _routeService.FindRouteByTransoprt(Transport, 1, 50);
+            var routes = await _routeService.FindRouteByTransoprt(Transport, firstPage, defaultPageSize);
 
             ViewData["MaxPrice"] = _routeService.GetMaxPriceInCategory(Transport);
             ViewData["UniqueDeparturePoint"] = await _routeService.GetAllCities(Transport);
