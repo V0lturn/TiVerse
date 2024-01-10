@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Pagination;
 using TiVerse.Application.UseCase;
+using TiVerse.Core.Entity;
 using TiVerse.Infrastructure.AppDbContext;
 
 namespace TiVerse.WebUI.Controllers
@@ -29,24 +31,24 @@ namespace TiVerse.WebUI.Controllers
             return View();
         }
 
-
         public async Task<IActionResult> FindSpecificRoute(string Departure, string Destination, DateTime Date, string Transport)
         {
-            var findRoutes = new RouteService(_context);
-            var routes = await findRoutes.FindRouteWithParams(Departure, Destination, Date, Transport);
+            var routeService = new RouteService(_context);
+            var routes = await routeService.FindRouteWithParams(Departure, Destination, Date, Transport);
 
             if (!routes.Any())
             {
                 ViewData["Error"] = "Не знайдено квитків за заданим маршрутом";
             }
 
-            return View("FindedRoutes", routes);
+            var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
+            return PartialView("_MostPopularRoutes", routesToDTO);
         }
 
         public async Task<IActionResult> FindAllRoutes(string Departure, string Destination)
         {
-            var findRoutes = new RouteService(_context);
-            var routes = await findRoutes.FindAllPossibleRoutes(Departure, Destination);
+            var routeService = new RouteService(_context);
+            var routes = await routeService.FindAllPossibleRoutes(Departure, Destination);
 
             if (!routes.Any())
             {
@@ -54,22 +56,7 @@ namespace TiVerse.WebUI.Controllers
             }
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
-            return PartialView("_DisplayRoutes", routesToDTO);
-        }
-
-        public async Task<IActionResult> FindRoutesByTransport(string Transport)
-        {
-            var findRoutes = new RouteService(_context);
-            var routes = await findRoutes.FindRouteByTransoprt(Transport);
-
-            if (!routes.Any())
-            {
-                ViewData["Error"] = "Не знайдено квитків за заданим маршрутом";
-            }
-
-            var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
-            return PartialView("_DisplayRoutes", routesToDTO); 
-        }
-
+            return PartialView("_MostPopularRoutes", routesToDTO);
+        }     
     }
 }

@@ -47,6 +47,11 @@
     </div>
 </div>
 
+<div class="route-titles">
+    <div class="route-titles__item"><span>Популярні напрямки по Україні</span></div>
+    <div class="route-titles__item"><span>Популярні напрямки в Європу</span></div>
+</div>
+
 <div class="routes-container">
     <div class="routes-container__local">      
         @{
@@ -97,24 +102,3 @@
         }
     </div>
 </div>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.routes-container__link').on('click', function (e) {
-            e.preventDefault();
-
-            var url = $(this).data('url');
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (data) {
-                    $('.maincontent').html(data);
-                },
-                error: function () {
-                    console.log('Error occurred while fetching data.');
-                }
-            });
-        });
-    });
-</script>

@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "_SiteLayout";
+    int maxPrice = Convert.ToInt32(ViewData["MaxPrice"]);
+    List<string> departurePoints = ViewData["UniqueDeparturePoint"] as List<string>;
+}
+
+<div class="display-container">
+    <div class="filter-container">
+        <div class="filter-container__title">
+            <i class="fa-solid fa-filter"></i>
+            <span>Фільтри</span>
+        </div>
+
+        <div class="filter-container__sorting">
+            <span>Впорядкувати за:</span>
+            <div class="filter-container__sorting-direction">
+                <div>
+                    <label class="filter-container__sorting-label">
+                        <input type="radio" name="sortingOrder" value="ascending" checked>
+                        Зростанням
+                    </label>
+                </div>
+                <div>
+                    <label class="filter-container__sorting-label">
+                        <input type="radio" name="sortingOrder" value="descending">
+                        Спаданням
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label class="filter-container__sorting-label">
+                    <input type="radio" name="sortingParameter" value="departureCity">
+                    Містом відбуття
+                </label>
+            </div>
+            <div>
+                <label class="filter-container__sorting-label">
+                    <input type="radio" name="sortingParameter" value="destinationCity">
+                    Містом прибуття
+                </label>
+            </div>
+            <div>
+                <label class="filter-container__sorting-label">
+                    <input type="radio" name="sortingParameter" value="date">
+                    Датою
+                </label>
+            </div>
+            <div>
+                <label class="filter-container__sorting-label">
+                    <input type="radio" name="sortingParameter" value="availableSeats">
+                    Кількістю місць
+                </label>
+            </div>
+            <div>
+                <label class="filter-container__sorting-label">
+                    <input type="radio" name="sortingParameter" value="price">
+                    Ціною
+                </label>
+            </div>
+        </div>
+
+        <div class="price">
+            <span>Ціна:</span>
+            <div class="price-slider" id="range-slider"></div>
+            <div class="price-inputs">
+                <label class="price-label">
+                    <span class="price-text">від</span>
+                    <input type="number" class="price-input" min="0" max="@maxPrice" placeholder="0" id="input-0" readonly>
+                    <span class="filter-container__price-text">&#8372</span>
+                </label>
+                <label class="price-label">
+                    <span class="price-text">до</span>
+                    <input type="number" class="price-input" min="0" max="@maxPrice" placeholder="@maxPrice" id="input-1" readonly>
+                    <span class="price-text">&#8372</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="fromCity">
+            <span>З міста:</span>
+            @if (ViewData["UniqueDeparturePoint"] != null)
+            {
+                foreach (var city in departurePoints)
+                {
+                    <label>
+                        <input type="checkbox" name="cityCheckbox" value="@city"/> @city
+                    </label>
+                } 
+            }
+        </div>
+    </div>
+
+    <div class="route-container">
+        @await Html.PartialAsync("_DisplayRoutes")
+    </div>
+
+</div>
+<script src="~/lib/nouislider.min.js"></script>
+
+<script>
+    var maxPrice = @maxPrice;
+</script>

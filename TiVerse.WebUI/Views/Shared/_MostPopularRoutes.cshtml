@@ -1,0 +1,10 @@
+﻿<div class="popularroute-container">
+    @if (!ViewData.ContainsKey("Error"))
+    {
+        @await Html.PartialAsync("_DisplayRoutes")
+    }
+    else
+    {
+        <h1>@ViewData["Error"]</h1>
+    }
+</div>

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+     int maxPrice = Convert.ToInt32(ViewData["MaxPrice"]);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,9 +12,7 @@
     <link rel="stylesheet" href="~/TiVerse.WebUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="~/scss/stylesheet.min.css" rel="stylesheet" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/lib/nouislider.min.css"/>
 </head>
 <body>
     <div class="wrapper">
@@ -88,26 +90,11 @@
             </div>
         </footer>
     </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        var maxPrice = @maxPrice;
+    </script>
 </body>
 </html>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#second-section__transport-selector').change(function () {
-            var selectedTransport = $(this).val();
-
-            $.ajax({
-                url: '/MainPage/FindRoutesByTransport',
-                type: 'GET',
-                data: { Transport: selectedTransport },
-                success: function (data) {
-                    $('.maincontent').html(data);
-                },
-                error: function () {
-                    console.log('Error occurred while fetching data.');
-                }
-            });
-        });
-    });
-</script>

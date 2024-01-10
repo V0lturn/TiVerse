@@ -1,7 +1,7 @@
-﻿<div class="route-container">
+﻿<div class="route-container__item" id="routeContainer">
     @foreach (var item in Model)
     {
-        <div class="route-block">
+        <div class="route-block" tripId="@item.TripID">
             <div class="route-block__details">
                 <span>З міста:</span>
                 <span class="route-block__details-text">@item.DeparturePoint</span>
@@ -21,7 +21,7 @@
             <div class="route-block__details">
                 <a class="route-block__details-buylink" href="#">
                     <span>купити за</span>
-                    <span class="route-block__details-text">@item.TicketCost</span>
+                    <span class="route-block__details-text">@item.TicketCost  &#8372</span>
                 </a>
             </div>
         </div>

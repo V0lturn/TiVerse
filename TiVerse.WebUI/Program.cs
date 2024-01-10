@@ -47,8 +47,8 @@ namespace TiVerse.WebUI
 
             app.MapControllerRoute(
                 name: "default",
-                // controllers: Home MainPage
-                // actions: Index(Home) 
+                // controllers: Home MainPage Transport
+                // actions: Index(Home)  FindRoutesByTransport 
                 pattern: "{controller=MainPage}/{action=Index}/{id?}");
             app.MapRazorPages();
 

@@ -1,0 +1,213 @@
+﻿@import "../common/_skin.scss";
+
+.display-container {
+    display:flex;
+    justify-content:center;
+    width: 60%;
+}
+
+.filter-container {
+    background-color: blue;
+    flex: 0 0 auto;
+    margin: 30px 10px;
+    background-color: rgba(255,255,255,.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    min-width: 20%;
+    padding: 5px;
+    border-radius: 10px;
+
+    &__title,
+    &__sorting {
+        border-bottom: 1px solid $color-darkblue;
+        font-size: 18px;
+        color: $color-darkblue;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        font-size: 20px;
+    }
+
+    &__sorting {
+
+        &-label {
+            input[type="radio"]:checked {
+                accent-color: $color-focus;
+            }
+        }
+
+        &-direction {
+            border-bottom: 1px solid $color-darkblue;
+        }
+    }
+}
+
+.route-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px 10px;
+    margin-bottom: 150px;
+
+    &__item {
+        min-width: 100%;
+    }
+}
+
+.route-block {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: stretch;
+    border-radius: 10px;
+    min-height: 150px;
+    background-color: rgba(255,255,255,.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    flex: 1;
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        padding: 0 10px;
+        font-size: 20px;
+
+        &-text {
+            font-weight: bold;
+        }
+
+        &-buylink {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            color: white;
+            background-color: $color-focus;
+            border-radius: 5px;
+            width: 150px;
+            max-height: 80px;
+
+            &:hover {
+                filter: brightness(90%);
+            }
+        }
+    }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.price {
+    font-size: 18px;
+    color: $color-darkblue;
+
+    &-slider {
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    &-inputs {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-input {
+        border: none;
+        color: $color-focus;
+        padding: 0 10px;
+    }
+
+    &-label {
+        display: flex;
+        align-items: center;
+        width: 130px;
+        height: 40px;
+        border: 1px solid $color-darkblue;
+        border-radius: 4px;
+        padding: 0 10px;
+    }
+
+    &-text {
+        font-size: 14px;
+
+        &:first-child {
+            margin-right: 10px;
+        }
+
+        &:last-child {
+            margin-right: 10px;
+        }
+    }
+}
+
+.noUi-connect {
+    background: $color-focus !important;
+}
+
+div.price-slider.noUi-target {
+    background-color: #bfbfbf !important;
+    border: none !important;
+    border-radius: 100px !important;
+    box-shadow: none !important;
+    height: 3px !important;
+}
+
+
+.noUi-handle::after,
+.noUi-handle::before {
+    display: none !important;
+}
+
+.noUi-handle {
+    box-shadow: none !important;
+    border-radius: 100% !important;
+    background-color: white !important;
+    border: 3px solid $color-focus !important;
+}
+
+.noUi-horizontal .noUi-handle {
+    width: 22px;
+    height: 22px;
+    top: -11px !important;
+}
+
+.noUi-horizontal .noUi-handle-upper {
+    right: 0 !important;
+}
+
+.noUi-horizontal .noUi-handle-lower {
+    right: -32px !important;
+}
+
+
+.fromCity {
+    font-size: 18px;
+    color: $color-darkblue;
+    border-top: 1px solid $color-darkblue;
+    border-bottom: 1px solid $color-darkblue;
+    margin-top: 20px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
