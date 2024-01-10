@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Pagination;
 using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
@@ -10,31 +11,28 @@ namespace TiVerse.WebUI.Controllers
 {
     public class MainPageController : Controller
     {
-        private readonly TiVerseDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IRouteService _routeService;
 
-        public MainPageController(TiVerseDbContext context, IMapper mapper)
+        public MainPageController(IMapper mapper, IRouteService routeService)
         {
-            _context = context;
             _mapper = mapper;
+            _routeService = routeService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var routeService = new RouteService(_context);
-
-            var ukraine_routes = await routeService.MostPopularRoutesInUkraine();
+            var ukraine_routes = await _routeService.MostPopularRoutesInUkraine();
             ViewData["InUkraine"] = ukraine_routes;
 
-            var foreign_routes = await routeService.MostPopularRoutesFromUkraine();
+            var foreign_routes = await _routeService.MostPopularRoutesFromUkraine();
             ViewData["FromUkraine"] = foreign_routes;
             return View();
         }
 
         public async Task<IActionResult> FindSpecificRoute(string Departure, string Destination, DateTime Date, string Transport)
-        {
-            var routeService = new RouteService(_context);
-            var routes = await routeService.FindRouteWithParams(Departure, Destination, Date, Transport);
+        {        
+            var routes = await _routeService.FindRouteWithParams(Departure, Destination, Date, Transport);
 
             if (!routes.Any())
             {
@@ -47,8 +45,7 @@ namespace TiVerse.WebUI.Controllers
 
         public async Task<IActionResult> FindAllRoutes(string Departure, string Destination)
         {
-            var routeService = new RouteService(_context);
-            var routes = await routeService.FindAllPossibleRoutes(Departure, Destination);
+            var routes = await _routeService.FindAllPossibleRoutes(Departure, Destination);
 
             if (!routes.Any())
             {

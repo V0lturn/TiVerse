@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq.Expressions;
 using TiVerse.Application.Data;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Pagination;
 using TiVerse.Core.Entity;
 
 namespace TiVerse.Application.UseCase
 {
-    public class RouteService
+    public class RouteService : IRouteService
     {
         private readonly IApplicationDbContext _dbContext;
 

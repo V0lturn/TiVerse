@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Pagination;
 using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
@@ -10,22 +11,21 @@ namespace TiVerse.WebUI.Controllers
 {
     public class TransportController : Controller
     {
-        private readonly TiVerseDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IRouteService _routeService;
 
-        public TransportController(TiVerseDbContext context, IMapper mapper)
+        public TransportController(IMapper mapper, IRouteService routeService)
         {
-            _context = context;
             _mapper = mapper;
+            _routeService = routeService;
         }
 
         public async Task<IActionResult> Index(string Transport)
         {
-            var routeService = new RouteService(_context);
-            var routes = await routeService.FindRouteByTransoprt(Transport, 1, 50);
+            var routes = await _routeService.FindRouteByTransoprt(Transport, 1, 50);
 
-            ViewData["MaxPrice"] = routeService.GetMaxPriceInCategory(Transport);
-            ViewData["UniqueDeparturePoint"] = await routeService.GetAllCities(Transport);
+            ViewData["MaxPrice"] = _routeService.GetMaxPriceInCategory(Transport);
+            ViewData["UniqueDeparturePoint"] = await _routeService.GetAllCities(Transport);
 
             if (!routes.Items.Any())
             {
@@ -40,16 +40,15 @@ namespace TiVerse.WebUI.Controllers
         public async Task<IActionResult> LoadRoutes(string selectedTransport, string sortingCriteria, string sortOrder, int minPrice, int maxPrice, 
             int page, List<string> selectedCities, int pageSize = 50)
         {
-            var routeService = new RouteService(_context);
             PagedList<Trip> loadedRoutes;
 
             if (sortingCriteria == null)
             {
-                loadedRoutes = await routeService.LoadRoutesWithoutSorting(selectedTransport, page, pageSize, minPrice, maxPrice);
+                loadedRoutes = await _routeService.LoadRoutesWithoutSorting(selectedTransport, page, pageSize, minPrice, maxPrice);
             }
             else
             {
-                loadedRoutes = await routeService.LoadRoutesWithSorting(selectedTransport, sortingCriteria, sortOrder, page, pageSize, minPrice, maxPrice, selectedCities);
+                loadedRoutes = await _routeService.LoadRoutesWithSorting(selectedTransport, sortingCriteria, sortOrder, page, pageSize, minPrice, maxPrice, selectedCities);
             }
 
             if (!loadedRoutes.Items.Any())

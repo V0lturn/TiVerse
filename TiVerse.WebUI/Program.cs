@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TiVerse.WebUI.Data;
 using TiVerse.Infrastructure.AppDbContext;
+using TiVerse.Application.Interfaces.IRouteServiceInterface;
+using TiVerse.Application.UseCase;
+using TiVerse.Application.Data;
+
 namespace TiVerse.WebUI
 {
     public class Program
@@ -12,16 +16,22 @@ namespace TiVerse.WebUI
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<IApplicationDbContext, TiVerseDbContext>();
+            builder.Services.AddScoped<IRouteService, RouteService>();
+
             builder.Services.AddDbContext<TiVerseDbContext>(options =>
               options.UseSqlServer(connectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
 
+            builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
