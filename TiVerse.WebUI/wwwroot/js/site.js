@@ -84,6 +84,22 @@
         loadRoutes(selectedTransport, sortingParameter, sortOrder, pageNumber, priceRange.min, priceRange.max, selectedCities);
     }
 
+    // Popular routes link ecent handler
+    $('.routes-container__link').on('click', function (e) {
+        e.preventDefault();
+        var url = $(this).data('url');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+                $('.maincontent').html(data);
+            },
+            error: function () {
+                console.log('Error occurred while fetching data.');
+            }
+        });
+    });
+
     // Radio button change event handler
     $('input[type=radio]').change(sendRequestOnRadioChange);
 
@@ -139,4 +155,23 @@
             });
         });
     }
+
+    // Choosing page in profile 
+    $('#personalInfoLink, #plannedTripLink, #tripHistoryLink, #accountBalanceLink').on('click', function (e) {
+        e.preventDefault();
+
+        var partialViewName = $(this).data('partialview');
+
+        $.ajax({
+            url: '/Account/LoadPartialView',
+            type: 'GET',
+            data: { viewName: partialViewName },
+            success: function (data) {
+                $('.displaypage').html(data);
+            },
+            error: function () {
+                alert('Ошибка при загрузке данных.');
+            }
+        });
+    });
 });

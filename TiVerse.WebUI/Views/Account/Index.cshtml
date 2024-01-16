@@ -1,55 +1,72 @@
 ﻿@{
-    ViewData["Title"] = "Bus Page";
     Layout = "_SiteLayout";
 }
+<div class="accountpage">
+    <div class="sidebar">
+        <div class="sidebar__user">
+            <span>@TiVerse.Shared.ParseUsername.GetName(User.Identity.Name):</span>
+        </div>
 
-<link href="~/css/site.css" rel="stylesheet" />
-
-<div class="account-container">
-    <div class="account-container">
-        <div class="leftpanel">
+        <div class="sidebar__list">
             <ul>
-                <li><a href="#personalInfo">Личная информация</a></li>
-                <li><a href="#plannedTrip">Заплановані поїздки</a></li>
-                <li><a href="#tripHistory">Історія поїздок</a></li>
+                <li>
+                    <a href="#" id="personalInfoLink" data-partialview="_PersonalInfo">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Особиста інформація</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="plannedTripLink" data-partialview="_PlannedTrip">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Заплановані поїздки</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="tripHistoryLink" data-partialview="_TripHistory">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Історія поїздок</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="accountBalanceLink" data-partialview="_TripHistory">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span>Поповнити рахунок</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Account" asp-action="Logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>                             
+                        <span>Вийти</span>
+                    </a>
+                </li>
             </ul>
         </div>
+    </div>
 
-        <div class="maincontent">
-            <div id="personalInfo" class="section">
-                @{
-                    await Html.RenderPartialAsync("_PersonalInfo");
-                }
-            </div>
-            <div id="plannedTrip" class="section">
-                @{
-                    await Html.RenderPartialAsync("_PlannedTrip");
-                }
-            </div>
-            <div id="tripHistory" class="section">
-                @{
-                    await Html.RenderPartialAsync("_TripHistory");
-                }
-            </div>
-        </div>
+    <div class="displaypage">
+        @await Html.PartialAsync("_PersonalInfo")
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script> 
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script> 
 <script>
     $(document).ready(function () {
+        $('#personalInfoLink, #plannedTripLink, #tripHistoryLink, #accountBalanceLink').on('click', function (e) {
+            e.preventDefault(); 
+            
+            var partialViewName = $(this).data('partialview');
 
-        $('#personalInfo').show();
-        $('#plannedTrip').hide();
-        $('#tripHistory').hide();
-
-        $('ul li a').click(function (e) {
-            e.preventDefault();
-
-            var sectionId = $(this).attr('href');
-
-            $('.section').hide();
-            $(sectionId).show();
+            $.ajax({
+                url: '/Account/LoadPartialView',
+                type: 'GET',
+                data: { viewName: partialViewName }, 
+                success: function (data) {
+                    $('.displaypage').html(data);
+                },
+                error: function () {
+                    alert('Ошибка при загрузке данных.');
+                }
+            });
         });
     });
-</script>
+</script> *@

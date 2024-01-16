@@ -1,1 +1,69 @@
-﻿<h1 class="personalinfo-header">Personal Info</h1>
+﻿<div class ="personalinfo">
+    <form asp-controller="=" asp-action="" method="post">                               @*Add controller and action metgod when create it*@
+        <div>
+            <h1 class="personalinfo__header">Особисті дані</h1>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Прізвище:</span>
+                <input class="personalinfo__form-input" type="text" name="lastname" placeholder="Прізвище" />
+            </div>
+            <div class="personalinfo__form-block">          
+                <span>Ім'я:</span>
+                <input class="personalinfo__form-input" type="text" name="firstname" placeholder="Ім'я" />
+            </div>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Электронна адреса:</span>
+                <input class="personalinfo__form-input email-input" type="email" name="email" placeholder="Электронна адреса">
+            </div>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Місто:</span>
+                <input class="personalinfo__form-input" type="text" name="city" placeholder="Місто">
+            </div>
+
+            <div class="personalinfo__form-block">
+                <span>Дата народження:</span>
+                <input class="personalinfo__form-input" type="date" name="Date">
+            </div>
+        </div>
+
+        <button type="submit" class="personalinfo__button">Зберегти</button>
+    </form>
+
+    <form asp-controller="=" asp-action="" method="post">
+        @*Add controller and action metgod when create it*@
+        <div>
+            <h2 class="personalinfo__header">Змінити пароль</h2>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Введіть старий пароль:</span>
+                <input class="personalinfo__form-input" type="password" name="oldPassword" placeholder="Старий пароль" />
+            </div>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Введіть новий пароль:</span>
+                <input class="personalinfo__form-input" type="password" name="newPassword" placeholder="Новий пароль">
+            </div>
+        </div>
+
+        <div class="personalinfo__form">
+            <div class="personalinfo__form-block">
+                <span>Повторіть пароль:</span>
+                <input class="personalinfo__form-input" type="password" name="repeatPassword" placeholder="Повторіть пароль">
+            </div>
+        </div>
+
+        <button type="submit" class="personalinfo__button">Змінити</button>
+    </form>
+</div>

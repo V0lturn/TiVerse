@@ -1,21 +1,107 @@
-﻿.account-container {
-    height: 100%;
+﻿@import "../common/_skin.scss";
+
+.accountpage {
     width: 100%;
-    /*background-color: rgb(255, 0, 0, 0.8)*/
-}
-
-.leftpanel {
-    box-sizing: border-box;
-    width: 20%;
-    position: fixed;
-    /*background-color: rgba(255, 255, 255, 0.8);*/
     height: 100%;
+    display: grid;
+    grid-template-areas:
+        "sidebar disppage";
+    grid-template-columns: 1fr 5fr;
+    background-color: $color-light;
 }
 
-.maincontent {
-    box-sizing: border-box;
-    margin-left: 20%;
-    /*background-color: rgba(255, 255, 255, 0.8);*/
-    width: 80%; 
+.sidebar {
+    color: $color-darkblue;
+    grid-area: sidebar;
+    border-right: 3px solid $color-darkblue;
+    background-color: rgba(255, 255, 255, 0.7);
+
+    &__user {
+        margin: 10px 0px 10px 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: $color-darkblue;
+        border-bottom: 2px solid $color-darkblue;
+    }
+
+    &__list {
+        font-size: 18px;
+
+        a {
+            display: block;
+            padding: 5px;
+            border-radius: 15px;
+            width: 90%;
+
+            i {
+                margin-right: 10px;
+            }
+        }
+
+        a:hover {
+            background-color: $color-focus;
+        }
+    }
 }
 
+.displaypage {
+    grid-area: disppage;
+    padding: 10px;
+}
+
+.personalinfo {
+    margin: 15px auto;
+    width: 60%;
+    border-radius: 20px;
+    padding: 10px 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    color: $color-darkblue;
+
+    &__header {
+        margin: 0;
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+
+        &-block {
+            display: flex;
+            flex-direction: column;
+            margin-right: 25%;
+        }
+
+        &-input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            font-size: 20px;
+            border: 1px solid $color-darkblue;
+            border-radius: 5px;
+            width: max-content;
+
+            &.email-input {
+                width: 160%;
+            }
+        }
+    }
+
+    &__button {
+        width: 150px;
+        height: 45px;
+        margin: 15px auto;
+        border-radius: 20px;
+        background-color: $color-focus;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        color: white;
+
+        &:hover {
+            border: 2px solid $color-darkblue;
+            color: $color-darkblue;
+        }
+    }
+}

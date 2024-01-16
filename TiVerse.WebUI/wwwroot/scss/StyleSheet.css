@@ -528,8 +528,95 @@ div.price-slider.noUi-target {
   margin-bottom: 5px;
 }
 
-/*@import "components//_account.scss";*/
-.personalinfo-header {
+.accountpage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas: "sidebar disppage";
+  grid-template-columns: 1fr 5fr;
+  background-color: #eff1f4;
+}
+
+.sidebar {
+  color: #0f2a3d;
+  grid-area: sidebar;
+  border-right: 3px solid #0f2a3d;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.sidebar__user {
+  margin: 10px 0px 10px 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0f2a3d;
+  border-bottom: 2px solid #0f2a3d;
+}
+.sidebar__list {
+  font-size: 18px;
+}
+.sidebar__list a {
+  display: block;
+  padding: 5px;
+  border-radius: 15px;
+  width: 90%;
+}
+.sidebar__list a i {
+  margin-right: 10px;
+}
+.sidebar__list a:hover {
+  background-color: #ffa439;
+}
+
+.displaypage {
+  grid-area: disppage;
+  padding: 10px;
+}
+
+.personalinfo {
+  margin: 15px auto;
+  width: 60%;
+  border-radius: 20px;
+  padding: 10px 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  color: #0f2a3d;
+}
+.personalinfo__header {
   margin: 0;
-  color: green;
+}
+.personalinfo__form {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+.personalinfo__form-block {
+  display: flex;
+  flex-direction: column;
+  margin-right: 25%;
+}
+.personalinfo__form-input {
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 20px;
+  border: 1px solid #0f2a3d;
+  border-radius: 5px;
+  width: max-content;
+}
+.personalinfo__form-input.email-input {
+  width: 160%;
+}
+.personalinfo__button {
+  width: 150px;
+  height: 45px;
+  margin: 15px auto;
+  border-radius: 20px;
+  background-color: #ffa439;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+.personalinfo__button:hover {
+  border: 2px solid #0f2a3d;
+  color: #0f2a3d;
 }

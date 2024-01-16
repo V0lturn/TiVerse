@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TiVerse.Application\TiVerse.Application.csproj" />
     <ProjectReference Include="..\TiVerse.Infrastructure\TiVerse.Infrastructure.csproj" />
+    <ProjectReference Include="..\TiVerse.Shared\TiVerse.Shared.csproj" />
   </ItemGroup>
 
 </Project>
