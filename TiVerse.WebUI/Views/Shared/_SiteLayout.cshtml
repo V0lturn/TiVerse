@@ -2,6 +2,7 @@
     
     int maxPrice = Convert.ToInt32(ViewData["MaxPrice"]);
 }
+@using TiVerse.Shared
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@
             <div class="header-container">
 
                 <div class="first-section">
-                    <a asp-controller="MainPage" asp-action="Index">
+                    <a href="/MainPage/Index">
                         <div class="first-section__icon">
                             <i class="fa-solid fa-truck-plane"></i>
                         </div>
@@ -45,31 +46,22 @@
                             <option value="English">Eng</option>
                         </select>
                     </div>
-                    
+                   
+                    <a asp-controller="MainPage" asp-action="CallApi">
+                        <div class="second-section__text">Api</div>
+                    </a>
+
                     <div class="second-section__block">
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            @* <a asp-controller="Home" asp-action="Index"> *@
-                            <a href="/Identity/Account/Login">
-                                <div class="second-section__icon">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                                <div class="second-section__text">Профіль</div>
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Account" asp-action="Index">
-                                <div class="second-section__icon">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                                <div class="second-section__text">@TiVerse.Shared.ParseUsername.GetName(User.Identity.Name)</div>
-                               </a>
-                        }
+                        <a asp-controller="Account" asp-action="Index">
+                            <div class="second-section__icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div class="second-section__text">@ParseUsername.GetName(@User.FindFirst("name")?.Value)</div>
+                        </a>                 
                     </div>
                     
                     <div class="second-section__block">
-                        <a asp-controller="Account" asp-action="Logout">
+                        <a asp-controller="MainPage" asp-action="Logout">
                             <div class="second-section__icon">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </div>

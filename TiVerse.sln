@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Core", "TiVerse.Core\TiVerse.Core.csproj", "{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Core", "TiVerse.Core\TiVerse.Core.csproj", "{9BF0B219-6A77-4B0C-B05F-73569BC0CE9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Application", "TiVerse.Application\TiVerse.Application.csproj", "{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Application", "TiVerse.Application\TiVerse.Application.csproj", "{09ADD47D-E0FC-420B-BA0E-3D31140E9E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Infrastructure", "TiVerse.Infrastructure\TiVerse.Infrastructure.csproj", "{8B3855ED-C54D-446B-8088-39F1214702D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Infrastructure", "TiVerse.Infrastructure\TiVerse.Infrastructure.csproj", "{8B3855ED-C54D-446B-8088-39F1214702D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Shared", "TiVerse.Shared\TiVerse.Shared.csproj", "{A8E11D74-8A52-4469-8D8E-00DED6978244}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Shared", "TiVerse.Shared\TiVerse.Shared.csproj", "{A8E11D74-8A52-4469-8D8E-00DED6978244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.WebUI", "TiVerse.WebUI\TiVerse.WebUI.csproj", "{3479A934-384F-4F16-8ED5-F40772F6A9FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.WebUI", "TiVerse.WebUI\TiVerse.WebUI.csproj", "{3479A934-384F-4F16-8ED5-F40772F6A9FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Api", "TiVerse.Api\TiVerse.Api.csproj", "{550D8978-C55A-4504-ACB5-EACB3E4136F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.IdentityServer", "TiVerse.IdentityServer\TiVerse.IdentityServer.csproj", "{95AC673F-67F2-4E64-890A-A967269B050A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3479A934-384F-4F16-8ED5-F40772F6A9FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550D8978-C55A-4504-ACB5-EACB3E4136F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550D8978-C55A-4504-ACB5-EACB3E4136F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550D8978-C55A-4504-ACB5-EACB3E4136F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550D8978-C55A-4504-ACB5-EACB3E4136F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95AC673F-67F2-4E64-890A-A967269B050A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95AC673F-67F2-4E64-890A-A967269B050A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95AC673F-67F2-4E64-890A-A967269B050A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95AC673F-67F2-4E64-890A-A967269B050A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

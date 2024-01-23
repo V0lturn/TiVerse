@@ -1,68 +1,86 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TiVerse.WebUI.Data;
 using TiVerse.Infrastructure.AppDbContext;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.UseCase;
 using TiVerse.Application.Data;
+using TiVerse.Application.Interfaces.IAccountServiceInterface;
+using TiVerse.Application.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 
-namespace TiVerse.WebUI
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// Add services to the container.
+builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-            builder.Services.AddScoped<IApplicationDbContext, TiVerseDbContext>();
-            builder.Services.AddScoped<IRouteService, RouteService>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services.AddDbContext<TiVerseDbContext>(options =>
+builder.Services.AddScoped<IApplicationDbContext, TiVerseDbContext>();
+builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddDbContext<TiVerseDbContext>(options =>
               options.UseSqlServer(connectionString));
 
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+    .AddCookie("Cookies")
+    .AddOpenIdConnect("oidc", options =>
+    {
+        options.Authority = "https://localhost:5001";
 
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+        options.ClientId = "web";
+        options.ClientSecret = "secret";
+        options.ResponseType = "code";
 
-            var app = builder.Build();
+        options.SaveTokens = true;
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseMigrationsEndPoint();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+        options.Scope.Clear();
+        options.Scope.Add("openid");
+        options.Scope.Add("profile");
+        options.Scope.Add("api1");
+        options.Scope.Add("offline_access");
+        options.GetClaimsFromUserInfoEndpoint = true;
+    });
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-            app.UseRouting();
+var app = builder.Build();
 
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                // controllers: Home MainPage Transport
-                // actions: Index(Home)  FindRoutesByTransport 
-                pattern: "{controller=MainPage}/{action=Index}/{id?}");
-            app.MapRazorPages();
-
-            app.Run();
-        }
-    }
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages().RequireAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=MainPage}/{action=Index}/{id?}");
+});
+
+app.Run();
+
+

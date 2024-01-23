@@ -1,0 +1,9 @@
+﻿@page
+@model IndexModel
+
+@using Microsoft.AspNetCore.Authentication
+
+<h1>Name:</h1>
+<h1>@User.FindFirst("name")?.Value</h1>
+
+<h2><a href ="https://localhost:5002/mainpage/index">На сторніку сайту</a></h2>

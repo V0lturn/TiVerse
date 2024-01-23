@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Azure.Core;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using System.Text.Json;
 using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
-using TiVerse.Application.Pagination;
-using TiVerse.Application.UseCase;
-using TiVerse.Core.Entity;
-using TiVerse.Infrastructure.AppDbContext;
 
 namespace TiVerse.WebUI.Controllers
 {
@@ -27,11 +28,11 @@ namespace TiVerse.WebUI.Controllers
 
             var foreign_routes = await _routeService.MostPopularRoutesFromUkraine();
             ViewData["FromUkraine"] = foreign_routes;
-            return View();
+            return View("Index");
         }
 
         public async Task<IActionResult> FindSpecificRoute(string Departure, string Destination, DateTime Date, string Transport)
-        {        
+        {
             var routes = await _routeService.FindRouteWithParams(Departure, Destination, Date, Transport);
 
             if (!routes.Any())
@@ -54,6 +55,20 @@ namespace TiVerse.WebUI.Controllers
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
             return PartialView("_MostPopularRoutes", routesToDTO);
-        }     
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            var callbackUrl = Url.Action("Index", "MainPage");
+
+            return SignOut(new AuthenticationProperties { RedirectUri = callbackUrl }, "Cookies", "oidc");
+        }
+
+        public IActionResult CallApi()
+        {
+            return RedirectToPage("/CallApi");
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace TiVerse.WebUI.Models
+namespace WebClient.Models
 {
     public class ErrorViewModel
     {
