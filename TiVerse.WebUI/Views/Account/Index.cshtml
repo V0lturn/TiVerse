@@ -1,10 +1,11 @@
-﻿@{
+﻿@using TiVerse.Shared
+@{
     Layout = "_SiteLayout";
 }
 <div class="accountpage">
     <div class="sidebar">
         <div class="sidebar__user">
-            <span>@TiVerse.Shared.ParseUsername.GetName(User.Identity.Name):</span>
+            <span>@ParseUsername.GetName(@User.FindFirst("name")?.Value):</span>
         </div>
 
         <div class="sidebar__list">
@@ -16,7 +17,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="plannedTripLink" data-partialview="_PlannedTrip">
+                    <a asp-controller="Account" asp-action="DisplayPlannedTrips" id="plannedTripLink" data-partialview="_PlannedTrip">
                         <i class="fa-solid fa-paper-plane"></i>
                         <span>Заплановані поїздки</span>
                     </a>
@@ -28,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="accountBalanceLink" data-partialview="_TripHistory">
+                    <a href="#" id="accountBalanceLink" data-partialview="_AccountBalance">
                         <i class="fa-solid fa-wallet"></i>
                         <span>Поповнити рахунок</span>
                     </a>
@@ -47,26 +48,3 @@
         @await Html.PartialAsync("_PersonalInfo")
     </div>
 </div>
-
-@* <script src="~/lib/jquery/dist/jquery.min.js"></script> 
-<script>
-    $(document).ready(function () {
-        $('#personalInfoLink, #plannedTripLink, #tripHistoryLink, #accountBalanceLink').on('click', function (e) {
-            e.preventDefault(); 
-            
-            var partialViewName = $(this).data('partialview');
-
-            $.ajax({
-                url: '/Account/LoadPartialView',
-                type: 'GET',
-                data: { viewName: partialViewName }, 
-                success: function (data) {
-                    $('.displaypage').html(data);
-                },
-                error: function () {
-                    alert('Ошибка при загрузке данных.');
-                }
-            });
-        });
-    });
-</script> *@

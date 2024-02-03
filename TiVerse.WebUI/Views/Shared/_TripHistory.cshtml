@@ -1,1 +1,54 @@
-﻿<h1>Trip history</h1>
+﻿@using TiVerse.Core.Entity;
+
+@{
+    var tripHistory = ViewData["TripHistory"] as List<Trip>;
+}
+
+<div class="account-container">
+    <div>
+        <h1 class="account-container__header">Історія поїздок</h1>
+    </div>
+
+    <div class="route-container__item" id="routeContainer">
+        @if (tripHistory != null && tripHistory.Any())
+        {
+            <div class="route-container__item" id="routeContainer">
+
+                @foreach (var item in tripHistory)
+                {
+                    <div class="route-block" tripId="@item.TripID">
+                        <div class="route-block__details">
+                            <span>З міста:</span>
+                            <span class="route-block__details-text">@item.DeparturePoint</span>
+                        </div>
+                        <div class="route-block__details">
+                            <span>В місто:</span>
+                            <span class="route-block__details-text">@item.DestinationPoint</span>
+                        </div>
+                        <div class="route-block__details">
+                            <span>Дата відправки:</span>
+                            <span class="route-block__details-text">@item.Date</span>
+                        </div>
+                        <div class="route-block__details">
+                            <span>Кількість місць:</span>
+                            <span class="route-block__details-text">@item.Places</span>
+                        </div>
+
+                        <div class="route-block__details">
+                            <button class="button-blocked">
+                                <span>куплено за</span>
+                                <span class="route-block__details-text">@item.TicketCost  &#8372</span>
+                            </button>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <h2 class="account-container__message">Історія подорожей поки не доступна або ви ще не здійснили жодної подорожі.</h2>
+        }
+    </div>
+</div>
+

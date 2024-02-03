@@ -92,12 +92,28 @@
     </div>
 
     <div class="route-container">
-        @await Html.PartialAsync("_DisplayRoutes")
+        <div class="messages">
+            @if (TempData.ContainsKey("SuccessMessage") && TempData["SuccessMessage"] != string.Empty)
+            {
+                <div class="alert alert--success">
+                    <h3>@TempData["SuccessMessage"]</h3>
+                </div>
+            }
+
+            @if (TempData.ContainsKey("ErrorMessage") && TempData["ErrorMessage"] != string.Empty)
+            {
+                <div class="alert alert---danger">
+                    <h3>@TempData["ErrorMessage"]</h3>
+                </div>
+            }
+        </div>
+
+        @await Html.PartialAsync("_DisplayRoutes") 
     </div>
 
 </div>
-<script src="~/lib/nouislider.min.js"></script>
 
+<script src="~/lib/nouislider.min.js"></script>
 <script>
     var maxPrice = @maxPrice;
 </script>

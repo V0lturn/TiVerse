@@ -1,4 +1,5 @@
-﻿using TiVerse.Application.DTO;
+﻿using Microsoft.EntityFrameworkCore;
+using TiVerse.Application.DTO;
 using TiVerse.Application.Pagination;
 using TiVerse.Core.Entity;
 
@@ -15,5 +16,6 @@ namespace TiVerse.Application.Interfaces.IRouteServiceInterface
         Task<List<TopRoutesDTO>> MostPopularRoutesFromUkraine();
         Task<PagedList<Trip>> LoadRoutesWithoutSorting(string selectedTransport, int page, int pageSize, int minPrice, int maxPrice);
         Task<PagedList<Trip>> LoadRoutesWithSorting(string selectedTransport, string sortingCriteria, string sortOrder, int page, int pageSize, int minPrice, int maxPrice, List<string> selectedCities);
+        Task<decimal> GetUserBalance(string userId);
     }
 }

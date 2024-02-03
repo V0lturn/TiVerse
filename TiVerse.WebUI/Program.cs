@@ -1,14 +1,15 @@
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TiVerse.Infrastructure.AppDbContext;
-using TiVerse.Application.Interfaces.IRouteServiceInterface;
-using TiVerse.Application.UseCase;
+using System.IdentityModel.Tokens.Jwt;
 using TiVerse.Application.Data;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
+using TiVerse.Application.Interfaces.IRepositoryInterface;
+using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
+using TiVerse.Application.UseCase;
+using TiVerse.Core.Entity;
+using TiVerse.Infrastructure.AppDbContext;
+using TiVerse.Infrastructure.IndentityDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,14 +20,26 @@ JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddScoped<IApplicationDbContext, TiVerseDbContext>();
-builder.Services.AddScoped<IRouteService, RouteService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
-
 builder.Services.AddDbContext<TiVerseDbContext>(options =>
               options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<ITiVerseDbContext, TiVerseDbContext>();
+builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITiVerseIRepository<Account>, TiVerseRepository<Account>>();
+builder.Services.AddScoped<ITiVerseIRepository<Trip>, TiVerseRepository<Trip>>();
+builder.Services.AddScoped<ITiVerseIRepository<UserRouteHistory>, TiVerseRepository<UserRouteHistory>>();
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAuth", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+    });
+});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -55,6 +68,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,7 +87,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages().RequireAuthorization();
+app.MapRazorPages();
 
 app.UseEndpoints(endpoints =>
 {

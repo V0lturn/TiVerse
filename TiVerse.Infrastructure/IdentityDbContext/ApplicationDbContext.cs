@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TiVerseIdentityServer.Models;
-using Microsoft.AspNetCore.Identity;
+using TiVerse.Core.Entity;
 
-namespace TiVerseIdentityServer.Data;
+
+namespace TiVerse.Infrastructure.IndentityDbContext;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {

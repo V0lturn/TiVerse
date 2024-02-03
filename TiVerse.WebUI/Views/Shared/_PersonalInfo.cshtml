@@ -1,69 +1,81 @@
-﻿<div class ="personalinfo">
-    <form asp-controller="=" asp-action="" method="post">                               @*Add controller and action metgod when create it*@
+﻿@using TiVerse.Core.Entity;
+@{
+    Account user = (Account)ViewData["ExistingUserData"];
+}
+
+<div class ="personalinfo">
+    <form asp-controller="Account" asp-action="UpdatePersonalInfo" method="post">                             
         <div>
             <h1 class="personalinfo__header">Особисті дані</h1>
         </div>
 
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Прізвище:</span>
-                <input class="personalinfo__form-input" type="text" name="lastname" placeholder="Прізвище" />
+        @if (TempData.ContainsKey("SuccessMessage"))
+        {
+            <div class="alert alert-success">
+                <h2>@TempData["SuccessMessage"]</h2>
             </div>
-            <div class="personalinfo__form-block">          
-                <span>Ім'я:</span>
-                <input class="personalinfo__form-input" type="text" name="firstname" placeholder="Ім'я" />
+        }
+
+        @if (TempData.ContainsKey("ErrorMessage"))
+        {
+            <div class="alert alert-danger">
+                <h2>@TempData["ErrorMessage"]</h2>
             </div>
-        </div>
+        }
 
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Электронна адреса:</span>
-                <input class="personalinfo__form-input email-input" type="email" name="email" placeholder="Электронна адреса">
+        @if(user != null)
+        {
+            <div class="personalinfo__form">
+                <div class="personalinfo__form-block">
+                    <span>Прізвище:</span>
+                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="Прізвище" value="@(user.LastName != null ? user.LastName : "")" />
+                </div>
+                <div class="personalinfo__form-block">
+                    <span>Ім'я:</span>
+                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="Ім'я" value="@(user.FirstName != null ? user.FirstName : "")" />
+                </div>
             </div>
-        </div>
 
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Місто:</span>
-                <input class="personalinfo__form-input" type="text" name="city" placeholder="Місто">
+            <div class="personalinfo__form">
+                <div class="personalinfo__form-block">
+                    <span>Місто:</span>
+                    <input class="personalinfo__form-input" type="text" name="City" placeholder="Місто" value="@(user.City != null ? user.City : "")">
+                </div>
+
+                <div class="personalinfo__form-block">
+                    <span>Дата народження:</span>
+                    <input class="personalinfo__form-input" type="date" name="BirthDate" value="@(user.BirthDate != null ? user.BirthDate.ToString("yyyy-MM-dd") : "")">
+                </div>
             </div>
 
-            <div class="personalinfo__form-block">
-                <span>Дата народження:</span>
-                <input class="personalinfo__form-input" type="date" name="Date">
+            <button type="submit" class="personalinfo__button">Зберегти</button>
+        }
+        else
+        {
+            <div class="personalinfo__form">
+                <div class="personalinfo__form-block">
+                    <span>Прізвище:</span>
+                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="Прізвище" />
+                </div>
+                <div class="personalinfo__form-block">
+                    <span>Ім'я:</span>
+                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="Ім'я" />
+                </div>
             </div>
-        </div>
 
-        <button type="submit" class="personalinfo__button">Зберегти</button>
-    </form>
+            <div class="personalinfo__form">
+                <div class="personalinfo__form-block">
+                    <span>Місто:</span>
+                    <input class="personalinfo__form-input" type="text" name="City" placeholder="Місто">
+                </div>
 
-    <form asp-controller="=" asp-action="" method="post">
-        @*Add controller and action metgod when create it*@
-        <div>
-            <h2 class="personalinfo__header">Змінити пароль</h2>
-        </div>
-
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Введіть старий пароль:</span>
-                <input class="personalinfo__form-input" type="password" name="oldPassword" placeholder="Старий пароль" />
+                <div class="personalinfo__form-block">
+                    <span>Дата народження:</span>
+                    <input class="personalinfo__form-input" type="date" name="BirthDate">
+                </div>
             </div>
-        </div>
 
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Введіть новий пароль:</span>
-                <input class="personalinfo__form-input" type="password" name="newPassword" placeholder="Новий пароль">
-            </div>
-        </div>
-
-        <div class="personalinfo__form">
-            <div class="personalinfo__form-block">
-                <span>Повторіть пароль:</span>
-                <input class="personalinfo__form-input" type="password" name="repeatPassword" placeholder="Повторіть пароль">
-            </div>
-        </div>
-
-        <button type="submit" class="personalinfo__button">Змінити</button>
+            <button type="submit" class="personalinfo__button">Зберегти</button>
+        }    
     </form>
 </div>

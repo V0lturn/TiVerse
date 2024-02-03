@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace IdentityServer.Data.Migrations.IdentityServer.ConfigurationDb
+namespace TiVerse.IdentityServer.Data.Migrations.IdentityServer.ConfigurationDb
 {
     /// <inheritdoc />
     public partial class InitialIdentityServerConfigurationDbMigration : Migration

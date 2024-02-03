@@ -36,5 +36,8 @@ namespace TiVerse.Core.Entity
         public string Company { get; set; }
         public int Places { get; set; }
         public decimal TicketCost { get; set; }
+
+        public virtual ICollection<UserRouteHistory> RouteHistory { get; set; }
+
     }
 }

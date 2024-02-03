@@ -105,3 +105,139 @@
         }
     }
 }
+
+.alert {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    padding-left: 5px;
+    border-radius: 30px;
+    min-width: 70%;
+    color: $color-darkblue;
+
+    h2 {
+        margin: 0;
+    }
+
+    &-success {
+        background-color: #6CD664;
+    }
+
+    &-danger {
+        background-color: #EE4444;
+    }
+}
+
+.account-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px auto;
+    margin-bottom: 150px;
+
+    &__item {
+        min-width: 100%;
+    }
+
+    &__header {
+        color: $color-darkblue;
+    }
+}
+
+.button-blocked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    color: white;
+    background-color: grey;
+    border-radius: 5px;
+    width: 150px;
+    max-height: 80px;
+}
+
+.account-container__message {
+    background-color: rgba(255,255,255,.7);
+    color: #EE4444;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.cash-container {
+    margin: 15px auto;
+    width: 60%;
+    border-radius: 20px;
+    padding: 10px 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+
+    &__title {
+        color: $color-darkblue;
+        text-align: center;
+    }
+
+    &__info {
+        display: flex;
+        justify-content:center;
+        gap: 250px;
+    }
+}
+
+.leftpannel {
+    padding: 15px;
+    border-right: 2px solid $color-darkblue;
+
+    .leftpannel-title {
+        color: $color-darkblue;
+    }
+
+    .leftpannel-balance {
+        font-size: 60px;
+        color: $color-focus;
+    }
+}
+
+.rightpannel {
+    display: flex;
+    justify-content: center;
+
+    &-label {
+        font-size: 28px;
+        font-weight: bold;
+        color: $color-darkblue;
+    }
+
+    &-input {
+        border: none;
+        outline: none;
+        padding: 8px;
+        font-size: 20px;
+        border: 1px solid $color-darkblue;
+        border-radius: 5px;
+        width: max-content;
+        margin-top: 50px;
+    }
+
+    &-button {
+        width: 200px;
+        height: 45px;
+        margin: 15px auto;
+        border-radius: 20px;
+        background-color: $color-focus;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        color: white;
+
+        &:hover {
+            border: 2px solid $color-darkblue;
+            color: $color-darkblue;
+        }
+    }
+}

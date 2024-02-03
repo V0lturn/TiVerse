@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace IdentityServer.Data.Migrations.IdentityServer.PersistedGrantDb
+namespace TiVerse.IdentityServer.Data.Migrations.IdentityServer.PersistedGrantDb
 {
     /// <inheritdoc />
     public partial class InitialIdentityServerPersistedGrantDbMigration : Migration

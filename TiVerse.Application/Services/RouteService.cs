@@ -6,18 +6,19 @@ using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Pagination;
 using TiVerse.Core.Entity;
+using TiVerse.Infrastructure.AppDbContext;
 
 namespace TiVerse.Application.UseCase
 {
     public class RouteService : IRouteService
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly ITiVerseDbContext _dbContext;
 
-        public RouteService(IApplicationDbContext dbContext)
+        public RouteService(ITiVerseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        
+
         public async Task<List<Trip>> FindRouteWithParams(string Departure, string Destination, DateTime Date, string Transport)
         {
             var query = _dbContext.Trips
@@ -44,7 +45,7 @@ namespace TiVerse.Application.UseCase
                 .ToListAsync();
 
             return routes;
-        }  
+        }
 
         public async Task<PagedList<Trip>> FindRouteByTransoprt(string TransportType, int page, int pageSize)
         {
@@ -141,14 +142,14 @@ namespace TiVerse.Application.UseCase
             return await PagedList<Trip>.CreateAsync(query, page, pageSize);
         }
 
-        public async Task<PagedList<Trip>> LoadRoutesWithSorting(string selectedTransport, string sortingCriteria, string sortOrder, 
+        public async Task<PagedList<Trip>> LoadRoutesWithSorting(string selectedTransport, string sortingCriteria, string sortOrder,
             int page, int pageSize, int minPrice, int maxPrice, List<string> selectedCities)
         {
             IQueryable<Trip> query = _dbContext.Trips
                 .Where(entity => entity.Transport.ToLower() == selectedTransport.ToLower()
                  && entity.TicketCost >= minPrice && entity.TicketCost <= maxPrice);
 
-            if(selectedCities.Any())
+            if (selectedCities.Any())
             {
                 query = query.Where(entity => selectedCities.Contains(entity.DeparturePoint));
             }
@@ -163,6 +164,15 @@ namespace TiVerse.Application.UseCase
             }
 
             return await PagedList<Trip>.CreateAsync(query, page, pageSize);
+        }
+
+        public async Task<decimal> GetUserBalance(string userId)
+        {
+            var user = await _dbContext.Accounts
+                .Where(account => account.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            return user?.CashBalance ?? 0;
         }
     }
 }

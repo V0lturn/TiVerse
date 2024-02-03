@@ -18,12 +18,33 @@
                 <span>Кількість місць:</span>
                 <span class="route-block__details-text">@item.Places</span>
             </div>
+
             <div class="route-block__details">
-                <a class="route-block__details-buylink" href="#">
+                <button class="route-block__details-buylink" onclick="buyTicket('@item.TripID')">
                     <span>купити за</span>
                     <span class="route-block__details-text">@item.TicketCost  &#8372</span>
-                </a>
+                </button>
             </div>
+
         </div>
     }
 </div>
+
+<script>
+    function buyTicket(tripId) {
+        console.log(tripId);
+        $.ajax({
+            url: '/Account/BuyTicket',
+            type: 'GET',
+            data: { tripId: tripId },
+            success: function (response) {
+                console.log('bought successfully');
+                $(".messages").html(response.message);
+                window.location.href = '/Account/Index'
+            },
+            error: function () {
+                console.log('Error buying ticket.');
+            }
+        });
+    }
+</script>

@@ -1,11 +1,13 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebClient.Pages
 {
 
+    [Authorize(Policy = "RequireAuth")]
     public class CallApiModel : PageModel
     {
         public string Json = string.Empty;

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace IdentityServer.Migrations
+namespace TiVerse.Infrastructure.Migrations.ApplicationDb
 {
     /// <inheritdoc />
-    public partial class InitializeAppDbContextInitialize : Migration
+    public partial class Identity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

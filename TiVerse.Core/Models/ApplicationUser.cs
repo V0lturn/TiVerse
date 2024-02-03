@@ -4,7 +4,7 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace TiVerseIdentityServer.Models;
+namespace TiVerse.Core.Entity;
 
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser

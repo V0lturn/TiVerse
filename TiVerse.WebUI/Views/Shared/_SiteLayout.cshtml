@@ -47,17 +47,31 @@
                         </select>
                     </div>
                    
-                    <a asp-controller="MainPage" asp-action="CallApi">
-                        <div class="second-section__text">Api</div>
-                    </a>
 
                     <div class="second-section__block">
-                        <a asp-controller="Account" asp-action="Index">
-                            <div class="second-section__icon">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                            <div class="second-section__text">@ParseUsername.GetName(@User.FindFirst("name")?.Value)</div>
-                        </a>                 
+                        <a asp-controller="MainPage" asp-action="CallApi">
+                            <div class="second-section__text">Call Api</div>
+                        </a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Index">
+                                <div class="second-section__balance">@ViewData["UserBalance"]  &#8372</div>
+                                <div class="second-section__icon">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div class="second-section__text">@ParseUsername.GetName(@User.FindFirst("name")?.Value)</div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Index">
+                                <div class="second-section__icon">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div class="second-section__text">Профіль</div>
+                            </a>
+                        }
                     </div>
                     
                     <div class="second-section__block">
@@ -65,7 +79,7 @@
                             <div class="second-section__icon">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </div>
-                            <div class="second-section__text">Вихід</div>
+                            <div class="second-section__text">Вийти</div>
                         </a>
                     </div>              
                 </div>

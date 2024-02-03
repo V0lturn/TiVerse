@@ -25,6 +25,9 @@ namespace TiVerse.WebUI.Controllers
 
         public async Task<IActionResult> Index(string Transport)
         {
+            TempData["SuccessMessage"] = string.Empty;
+            TempData["ErrorMessage"] = string.Empty;
+
             var routes = await _routeService.FindRouteByTransoprt(Transport, firstPage, defaultPageSize);
 
             ViewData["MaxPrice"] = _routeService.GetMaxPriceInCategory(Transport);
@@ -34,6 +37,9 @@ namespace TiVerse.WebUI.Controllers
             {
                 ViewData["Error"] = "Не знайдено квитків за заданим маршрутом";
             }
+
+            string userId = HttpContext.User.FindFirst("sub")?.Value;
+            ViewData["UserBalance"] = await _routeService.GetUserBalance(userId);
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes.Items);
             return View(routesToDTO);

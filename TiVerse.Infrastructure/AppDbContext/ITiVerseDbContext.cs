@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TiVerse.Core.Entity;
 
-namespace TiVerse.Application.Data
+namespace TiVerse.Infrastructure.AppDbContext
 {
-    public interface IApplicationDbContext
+    public interface ITiVerseDbContext
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Trip> Trips { get; set; }

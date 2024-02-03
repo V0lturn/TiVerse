@@ -1,13 +1,12 @@
-﻿using System.Security.Claims;
-using Duende.IdentityServer.EntityFramework.DbContexts;
+﻿using Duende.IdentityServer.EntityFramework.DbContexts;
 using Duende.IdentityServer.EntityFramework.Mappers;
 using Duende.IdentityServer.Models;
 using IdentityModel;
-using TiVerseIdentityServer.Data;
-using TiVerseIdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Security.Claims;
+using TiVerse.Core.Entity;
 
 namespace TiVerseIdentityServer;
 public class SeedData

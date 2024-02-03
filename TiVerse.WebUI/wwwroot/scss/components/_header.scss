@@ -36,6 +36,11 @@
 
     &__block {
         margin-left: 40px;
+        display: flex;
+
+        a {
+            min-width: 120px;
+        }
     }
 
     &__selector {
@@ -54,6 +59,11 @@
         align-items: center;
         justify-content: center;
         flex-direction: row;
+    }
+
+    &__balance {
+        color: $color-focus;
+        padding-right: 10px;
     }
 }
 

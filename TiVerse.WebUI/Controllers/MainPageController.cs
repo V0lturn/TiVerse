@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
 
 namespace TiVerse.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class MainPageController : Controller
     {
         private readonly IMapper _mapper;
@@ -28,6 +30,10 @@ namespace TiVerse.WebUI.Controllers
 
             var foreign_routes = await _routeService.MostPopularRoutesFromUkraine();
             ViewData["FromUkraine"] = foreign_routes;
+
+            string userId = HttpContext.User.FindFirst("sub")?.Value;
+            ViewData["UserBalance"] = await _routeService.GetUserBalance(userId);
+
             return View("Index");
         }
 
@@ -59,13 +65,15 @@ namespace TiVerse.WebUI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Logout()
+        [Authorize(Policy = "RequireAuth")]
+        public IActionResult Logout()
         {
             var callbackUrl = Url.Action("Index", "MainPage");
 
             return SignOut(new AuthenticationProperties { RedirectUri = callbackUrl }, "Cookies", "oidc");
         }
 
+        [Authorize(Policy = "RequireAuth")]
         public IActionResult CallApi()
         {
             return RedirectToPage("/CallApi");
