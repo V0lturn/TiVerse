@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Івано-Франківськ" xml:space="preserve">
+    <value>Івано-Франківськ</value>
+  </data>
+  <data name="Істанбул" xml:space="preserve">
+    <value>Істанбул</value>
+  </data>
+  <data name="Амстердам" xml:space="preserve">
+    <value>Амстердам</value>
+  </data>
+  <data name="Барселона" xml:space="preserve">
+    <value>Барселона</value>
+  </data>
+  <data name="Берлін" xml:space="preserve">
+    <value>Берлін</value>
+  </data>
+  <data name="Вінниця" xml:space="preserve">
+    <value>Вінниця</value>
+  </data>
+  <data name="Гонконг" xml:space="preserve">
+    <value>Гонконг</value>
+  </data>
+  <data name="Даллас" xml:space="preserve">
+    <value>Даллас</value>
+  </data>
+  <data name="Дніпро" xml:space="preserve">
+    <value>Дніпро</value>
+  </data>
+  <data name="Донецьк" xml:space="preserve">
+    <value>Донецьк</value>
+  </data>
+  <data name="Дубай" xml:space="preserve">
+    <value>Дубай</value>
+  </data>
+  <data name="Житомир" xml:space="preserve">
+    <value>Житомир</value>
+  </data>
+  <data name="Запоріжжя" xml:space="preserve">
+    <value>Запоріжжя</value>
+  </data>
+  <data name="Кам'янець-Подільський" xml:space="preserve">
+    <value>Кам'янець-Подільський</value>
+  </data>
+  <data name="Київ" xml:space="preserve">
+    <value>Київ</value>
+  </data>
+  <data name="Кривий Ріг" xml:space="preserve">
+    <value>Кривий Ріг</value>
+  </data>
+  <data name="Лондон" xml:space="preserve">
+    <value>Лондон</value>
+  </data>
+  <data name="Лос-Анджелес" xml:space="preserve">
+    <value>Лос-Анджелес</value>
+  </data>
+  <data name="Львів" xml:space="preserve">
+    <value>Львів</value>
+  </data>
+  <data name="Мадрид" xml:space="preserve">
+    <value>Мадрид</value>
+  </data>
+  <data name="Маріуполь" xml:space="preserve">
+    <value>Маріуполь</value>
+  </data>
+  <data name="Мельбурн" xml:space="preserve">
+    <value>Мельбурн</value>
+  </data>
+  <data name="Миколаїв" xml:space="preserve">
+    <value>Миколаїв</value>
+  </data>
+  <data name="Мюнхен" xml:space="preserve">
+    <value>Мюнхен</value>
+  </data>
+  <data name="Нью-Йорк" xml:space="preserve">
+    <value>Нью-Йорк</value>
+  </data>
+  <data name="Одеса" xml:space="preserve">
+    <value>Одеса</value>
+  </data>
+  <data name="Париж" xml:space="preserve">
+    <value>Париж</value>
+  </data>
+  <data name="Пекін" xml:space="preserve">
+    <value>Пекін</value>
+  </data>
+  <data name="Полтава" xml:space="preserve">
+    <value>Полтава</value>
+  </data>
+  <data name="Прага" xml:space="preserve">
+    <value>Прага</value>
+  </data>
+  <data name="Рівне" xml:space="preserve">
+    <value>Рівне</value>
+  </data>
+  <data name="Рим" xml:space="preserve">
+    <value>Рим</value>
+  </data>
+  <data name="Сідней" xml:space="preserve">
+    <value>Сідней</value>
+  </data>
+  <data name="Сан-Франциско" xml:space="preserve">
+    <value>Сан-Франциско</value>
+  </data>
+  <data name="Сеул" xml:space="preserve">
+    <value>Сеул</value>
+  </data>
+  <data name="Суми" xml:space="preserve">
+    <value>Суми</value>
+  </data>
+  <data name="Токіо" xml:space="preserve">
+    <value>Токіо</value>
+  </data>
+  <data name="Торонто" xml:space="preserve">
+    <value>Торонто</value>
+  </data>
+  <data name="Флоренція" xml:space="preserve">
+    <value>Флоренція</value>
+  </data>
+  <data name="Харків" xml:space="preserve">
+    <value>Харків</value>
+  </data>
+  <data name="Херсон" xml:space="preserve">
+    <value>Херсон</value>
+  </data>
+  <data name="Черкаси" xml:space="preserve">
+    <value>Черкаси</value>
+  </data>
+  <data name="Чернігів" xml:space="preserve">
+    <value>Чернігів</value>
+  </data>
+</root>

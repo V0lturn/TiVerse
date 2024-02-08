@@ -10,7 +10,10 @@ using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
 using TiVerse.Infrastructure.AppDbContext;
 using TiVerse.Infrastructure.IndentityDbContext;
-
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using TiVerse.WebUI.CityLocalizer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -29,6 +32,7 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITiVerseIRepository<Account>, TiVerseRepository<Account>>();
 builder.Services.AddScoped<ITiVerseIRepository<Trip>, TiVerseRepository<Trip>>();
 builder.Services.AddScoped<ITiVerseIRepository<UserRouteHistory>, TiVerseRepository<UserRouteHistory>>();
+builder.Services.AddScoped<ICityLocalization, CityLocalization>();
 
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -65,12 +69,35 @@ builder.Services.AddAuthentication(options =>
         options.GetClaimsFromUserInfoEndpoint = true;
     });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(options =>
+{
+    options.ResourcesPath = "Resources";
+
+});
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+                    new CultureInfo("ru"),
+                    new CultureInfo("en")
+                };
+
+    options.DefaultRequestCulture = new RequestCulture("ru");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+app.UseRequestLocalization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

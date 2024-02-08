@@ -6,10 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TiVerse.Application\TiVerse.Application.csproj" />
-    <ProjectReference Include="..\TiVerse.Core\TiVerse.Core.csproj" />
-    <ProjectReference Include="..\TiVerse.Infrastructure\TiVerse.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

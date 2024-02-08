@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
 	</ItemGroup>
 
@@ -39,9 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TiVerse.Application\TiVerse.Application.csproj" />
-		<ProjectReference Include="..\TiVerse.Infrastructure\TiVerse.Infrastructure.csproj" />
-		<ProjectReference Include="..\TiVerse.Shared\TiVerse.Shared.csproj" />
+	  <ProjectReference Include="..\TiVerse.Application\TiVerse.Application.csproj" />
+	  <ProjectReference Include="..\TiVerse.Shared\TiVerse.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

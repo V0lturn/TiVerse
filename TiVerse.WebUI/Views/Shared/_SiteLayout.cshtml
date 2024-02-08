@@ -1,9 +1,10 @@
 ﻿@{
-    
     int maxPrice = Convert.ToInt32(ViewData["MaxPrice"]);
 }
 @using TiVerse.Shared
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,19 +34,21 @@
                 <div class="second-section">
                     <div class="second-section__block">
                         <select id="second-section__transport-selector" class="second-section__selector">
-                            <option value="" disabled selected hidden>Транспорт</option>
-                            <option value="Bus">Автобус</option>
-                            <option value="Train">Потяг</option>
-                            <option value="Plane">Літак</option>
+                            <option value="" disabled selected hidden>@Localizer["Транспорт"]</option>
+                            <option value="Bus">@Localizer["Автобус"]</option>
+                            <option value="Train">@Localizer["Потяг"]</option>
+                            <option value="Plane">@Localizer["Літак"]</option>
                         </select>
                     </div>
 
                     <div class="second-section__language-selector second-section__block">
                         <select id="second-section__language-selector" class="second-section__selector">
-                            <option value="Ukrainian" selected>Укр</option>
-                            <option value="English">Eng</option>
+                            <option value="" disabled selected hidden>@Localizer["Мова"]</option>
+                            <option value="ru">@Localizer["Укр"]</option>
+                            <option value="en">Eng</option>
                         </select>
                     </div>
+
                    
 
                     <div class="second-section__block">
@@ -69,7 +72,7 @@
                                 <div class="second-section__icon">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
-                                <div class="second-section__text">Профіль</div>
+                                <div class="second-section__text">@Localizer["Профіль"]</div>
                             </a>
                         }
                     </div>
@@ -79,7 +82,7 @@
                             <div class="second-section__icon">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </div>
-                            <div class="second-section__text">Вийти</div>
+                            <div class="second-section__text">@Localizer["Вийти"]</div>
                         </a>
                     </div>              
                 </div>
@@ -99,9 +102,9 @@
 
             <div class="footer-navbar">
                 <ul class="footer-navbar__list">
-                    <li><a href="#" class="footer-navbar__list-link">Правила</a></li>
-                    <li><a href="#" class="footer-navbar__list-link">Підтримка</a></li>
-                    <li><a href="#" class="footer-navbar__list-link">Політика конфіденційності</a></li>
+                    <li><a href="#" class="footer-navbar__list-link">@Localizer["Правила"]</a></li>
+                    <li><a href="#" class="footer-navbar__list-link">@Localizer["Підтримка"]</a></li>
+                    <li><a href="#" class="footer-navbar__list-link">@Localizer["Політика конфіденційності"]</a></li>
                 </ul>
             </div>
         </footer>

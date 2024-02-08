@@ -1,7 +1,11 @@
 ﻿@using TiVerse.Shared
+@using Microsoft.AspNetCore.Mvc.Localization
 @{
     Layout = "_SiteLayout";
 }
+
+@inject IViewLocalizer Localizer
+
 <div class="accountpage">
     <div class="sidebar">
         <div class="sidebar__user">
@@ -13,31 +17,31 @@
                 <li>
                     <a href="#" id="personalInfoLink" data-partialview="_PersonalInfo">
                         <i class="fa-solid fa-circle-info"></i>
-                        <span>Особиста інформація</span>
+                        <span>@Localizer["Особиста інформація"]</span>
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Account" asp-action="DisplayPlannedTrips" id="plannedTripLink" data-partialview="_PlannedTrip">
                         <i class="fa-solid fa-paper-plane"></i>
-                        <span>Заплановані поїздки</span>
+                        <span>@Localizer["Заплановані поїздки"]</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="tripHistoryLink" data-partialview="_TripHistory">
                         <i class="fa-solid fa-clock-rotate-left"></i>
-                        <span>Історія поїздок</span>
+                        <span>@Localizer["Історія поїздок"]</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="accountBalanceLink" data-partialview="_AccountBalance">
                         <i class="fa-solid fa-wallet"></i>
-                        <span>Поповнити рахунок</span>
+                        <span>@Localizer["Поповнити рахунок"]</span>
                     </a>
                 </li>
                 <li>
                     <a asp-controller="MainPage" asp-action="Logout">
                         <i class="fa-solid fa-right-from-bracket"></i>                             
-                        <span>Вийти</span>
+                        <span>@Localizer["Вийти"]</span>
                     </a>
                 </li>
             </ul>

@@ -117,6 +117,24 @@
         window.location.href = '/Transport/Index?Transport=' + selectedTransport;
     });
 
+    $('#second-section__language-selector').change(function (e) {
+        var selectedCulture = e.target.value; 
+        fetch(`/SetCulture?culture=${selectedCulture}`, { method: 'POST' })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+
     // Event handler for changing checkboxes with cities
     $('input[name="cityCheckbox"]').change(sendRequestOnCheckboxChange);
 

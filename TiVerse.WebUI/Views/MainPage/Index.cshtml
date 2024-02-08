@@ -3,37 +3,41 @@
     Layout = "_SiteLayout";
 }
 
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 <div class="mainpage-container maincontent">
-    <h1 class="mainpage-title">Пошук квитків онлайн</h1>
+    <h1 class="mainpage-title">@Localizer["Пошук квитків онлайн"]</h1>
 
     <form class="mainpage-form" asp-controller="MainPage" asp-action="FindSpecificRoute" method="post">
         <div class="mainpage-form__group">
             <div class="mainpage-form__group-block">
-                <label class="mainpage-form__group-text" for="from">Звідки:</label>
+                <label class="mainpage-form__group-text" for="from">@Localizer["Звідки"]:</label>
                 <input class="mainpage-form__group-input" type="text" id="from" name="Departure" required>
             </div>
 
             <div class="mainpage-form__group-block">
-                <label class="mainpage-form__group-text" for="to">Куди:</label>
+                <label class="mainpage-form__group-text" for="to">@Localizer["Куди"]:</label>
                 <input class="mainpage-form__group-input" type="text" id="to" name="Destination" required>
             </div>
 
             <div class="mainpage-form__group-block">
-                <label class="mainpage-form__group-text" for="date">Коли:</label>
+                <label class="mainpage-form__group-text" for="date">@Localizer["Коли"]:</label>
                 <input class="mainpage-form__group-input" type="date" id="date" name="Date" required>
             </div>
 
             <div class="mainpage-form__group-block">
-                <label class="mainpage-form__group-text" for="date">Транспорт:</label>
+                <label class="mainpage-form__group-text" for="date">@Localizer["Транспорт"]:</label>
                 <select class="mainpage-form__group-select" id="transport" name="Transport">
-                    <option value="" selected>Будь-що</option>
-                    <option value="bus">Автобус</option>
-                    <option value="train">Потяг</option>
-                    <option value="plane">Літак</option>
+                    <option value="" selected>@Localizer["Будь-що"]</option>
+                    <option value="bus">@Localizer["Автобус"]</option>
+                    <option value="train">@Localizer["Потяг"]</option>
+                    <option value="plane">@Localizer["Літак"]</option>
                 </select>
             </div>     
         </div>
-        <input class="mainpage-form__button" type="submit" value="Пошук">
+        <input class="mainpage-form__button" type="submit" value="@Localizer["Пошук"]">
     </form>
 </div>
 
@@ -48,8 +52,9 @@
 </div>
 
 <div class="route-titles">
-    <div class="route-titles__item"><span>Популярні напрямки по Україні</span></div>
-    <div class="route-titles__item"><span>Популярні напрямки в Європу</span></div>
+    <div class="route-titles__item">
+        <span>@Localizer["Популярні напрямки по Україні"]</span></div>
+    <div class="route-titles__item"><span>@Localizer["Популярні напрямки в Європу"]</span></div>
 </div>
 
 <div class="routes-container">
@@ -68,7 +73,7 @@
                                 <div><span>@route.DestinationPoint</span></div>
                             </div>
                             <div class="route-price">
-                            <span>від @route.MinPrice &#8372</span>
+                                <span>@Localizer["від"] @route.MinPrice &#8372</span>
                             </div>
                         </div>
                     </a>
@@ -93,7 +98,7 @@
                                 <div><span>@route.DestinationPoint</span></div>
                             </div>
                             <div class="route-price">
-                                <span>від @route.MinPrice &#8372</span>
+                                <span>@Localizer["від"] @route.MinPrice &#8372</span>
                             </div>
                         </div>
                     </a>

@@ -1,12 +1,16 @@
-﻿<div class="cash-container">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<div class="cash-container">
     <div class="cash-container__title">
-        <h1>Баланс акаунту</h1>
+        <h1>@Localizer["Баланс акаунту"]</h1>
     </div>
 
     <div class="cash-container__info">
         <div class="leftpannel">
             <div class="leftpannel-title">
-                <h2>Поточний баланс:</h2>
+                <h2>@Localizer["Поточний баланс"]:</h2>
             </div>
             <div class="leftpannel-balance">
                 <span>@ViewData["AccountBalance"]</span>
@@ -16,13 +20,13 @@
         <div class="rightpannel">
             <form asp-controller="Account" asp-action="TopUpBalance" method="post">
                 <div>
-                    <label class="rightpannel-label" for="topUpAmount">Сума для поповнення:</label>
+                    <label class="rightpannel-label" for="topUpAmount">@Localizer["Сума для поповнення"]:</label>
                 </div>
                 <div>
                     <input class="rightpannel-input" type="number" step="0.01" name="topUpAmount" id="topUpAmount" required>
                 </div>
                 <div>
-                    <button class="rightpannel-button" type="submit">Поповнити баланс</button>
+                    <button class="rightpannel-button" type="submit">@Localizer["Поповнити баланс"]</button>
                 </div>                            
             </form>
         </div>

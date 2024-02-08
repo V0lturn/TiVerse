@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.Pagination;
 using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
 using TiVerse.Infrastructure.AppDbContext;
+using TiVerse.WebUI.CityLocalizer;
 
 namespace TiVerse.WebUI.Controllers
 {
@@ -13,14 +15,17 @@ namespace TiVerse.WebUI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRouteService _routeService;
+        private readonly ICityLocalization _cityLocalization;
 
         const int firstPage = 1;
         const int defaultPageSize = 50;
 
-        public TransportController(IMapper mapper, IRouteService routeService)
+        public TransportController(IMapper mapper, IRouteService routeService, 
+            ICityLocalization cityLocalization)
         {
             _mapper = mapper;
             _routeService = routeService;
+            _cityLocalization = cityLocalization;
         }
 
         public async Task<IActionResult> Index(string Transport)
@@ -31,7 +36,11 @@ namespace TiVerse.WebUI.Controllers
             var routes = await _routeService.FindRouteByTransoprt(Transport, firstPage, defaultPageSize);
 
             ViewData["MaxPrice"] = _routeService.GetMaxPriceInCategory(Transport);
-            ViewData["UniqueDeparturePoint"] = await _routeService.GetAllCities(Transport);
+            
+            var uniqueCities = await _routeService.GetAllCities(Transport);
+            var localizedCities = _cityLocalization.GetLocalizedList(uniqueCities);
+
+            ViewData["UniqueDeparturePoint"] = localizedCities;
 
             if (!routes.Items.Any())
             {
@@ -42,7 +51,9 @@ namespace TiVerse.WebUI.Controllers
             ViewData["UserBalance"] = await _routeService.GetUserBalance(userId);
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes.Items);
-            return View(routesToDTO);
+            var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+            return View(localizedRoutes);
         }
 
         [HttpPost]
@@ -57,7 +68,14 @@ namespace TiVerse.WebUI.Controllers
             }
             else
             {
-                loadedRoutes = await _routeService.LoadRoutesWithSorting(selectedTransport, sortingCriteria, sortOrder, page, pageSize, minPrice, maxPrice, selectedCities);
+                List<string> localizedList = new List<string>();
+                foreach(var item in selectedCities)
+                {
+                    var localizedCity = _cityLocalization.GetUkrainianCityName(item);
+                    localizedList.Add(localizedCity);
+                }
+
+                loadedRoutes = await _routeService.LoadRoutesWithSorting(selectedTransport, sortingCriteria, sortOrder, page, pageSize, minPrice, maxPrice, localizedList);
             }
 
             if (!loadedRoutes.Items.Any())
@@ -66,7 +84,9 @@ namespace TiVerse.WebUI.Controllers
             }
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(loadedRoutes.Items);
-            return PartialView("_DisplayRoutes", routesToDTO);
+            var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+            return PartialView("_DisplayRoutes", localizedRoutes);
         }     
     }
 }

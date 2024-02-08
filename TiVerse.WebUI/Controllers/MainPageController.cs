@@ -2,12 +2,14 @@
 using Azure.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
+using TiVerse.WebUI.CityLocalizer;
 
 namespace TiVerse.WebUI.Controllers
 {
@@ -16,20 +18,23 @@ namespace TiVerse.WebUI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRouteService _routeService;
+        private readonly ICityLocalization _cityLocalization;
 
-        public MainPageController(IMapper mapper, IRouteService routeService)
+        public MainPageController(IMapper mapper, IRouteService routeService,
+            ICityLocalization cityLocalization)
         {
             _mapper = mapper;
             _routeService = routeService;
+            _cityLocalization = cityLocalization;
         }
 
         public async Task<IActionResult> Index()
         {
             var ukraine_routes = await _routeService.MostPopularRoutesInUkraine();
-            ViewData["InUkraine"] = ukraine_routes;
+            ViewData["InUkraine"] = _cityLocalization.GetLocalizedList(ukraine_routes);
 
             var foreign_routes = await _routeService.MostPopularRoutesFromUkraine();
-            ViewData["FromUkraine"] = foreign_routes;
+            ViewData["FromUkraine"] = _cityLocalization.GetLocalizedList(foreign_routes);
 
             string userId = HttpContext.User.FindFirst("sub")?.Value;
             ViewData["UserBalance"] = await _routeService.GetUserBalance(userId);
@@ -39,7 +44,7 @@ namespace TiVerse.WebUI.Controllers
 
         public async Task<IActionResult> FindSpecificRoute(string Departure, string Destination, DateTime Date, string Transport)
         {
-            var routes = await _routeService.FindRouteWithParams(Departure, Destination, Date, Transport);
+            var routes = await _routeService.FindRouteWithParams(_cityLocalization.GetUkrainianCityName(Departure), _cityLocalization.GetUkrainianCityName(Destination), Date, Transport);
 
             if (!routes.Any())
             {
@@ -47,12 +52,14 @@ namespace TiVerse.WebUI.Controllers
             }
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
-            return PartialView("_MostPopularRoutes", routesToDTO);
+            var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+            return View(localizedRoutes);
         }
 
         public async Task<IActionResult> FindAllRoutes(string Departure, string Destination)
         {
-            var routes = await _routeService.FindAllPossibleRoutes(Departure, Destination);
+            var routes = await _routeService.FindAllPossibleRoutes(_cityLocalization.GetUkrainianCityName(Departure), _cityLocalization.GetUkrainianCityName(Destination));
 
             if (!routes.Any())
             {
@@ -60,7 +67,9 @@ namespace TiVerse.WebUI.Controllers
             }
 
             var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
-            return PartialView("_MostPopularRoutes", routesToDTO);
+            var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+            return PartialView("_MostPopularRoutes", localizedRoutes);
         }
 
 
@@ -78,5 +87,24 @@ namespace TiVerse.WebUI.Controllers
         {
             return RedirectToPage("/CallApi");
         }
+
+        [HttpPost]
+        [Route("/SetCulture")]
+        public IActionResult SetCulture([FromQuery] string culture)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddYears(1),
+                IsEssential = true,
+                SameSite = SameSiteMode.Strict,
+            };
+
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                cookieOptions);
+
+            return Ok(new { success = true });
+        }
+
     }
 }

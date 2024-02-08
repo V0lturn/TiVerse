@@ -1,12 +1,16 @@
 ﻿@using TiVerse.Core.Entity;
+@using Microsoft.AspNetCore.Mvc.Localization
 @{
     Account user = (Account)ViewData["ExistingUserData"];
 }
 
+@inject IViewLocalizer Localizer
+
+
 <div class ="personalinfo">
     <form asp-controller="Account" asp-action="UpdatePersonalInfo" method="post">                             
         <div>
-            <h1 class="personalinfo__header">Особисті дані</h1>
+            <h1 class="personalinfo__header">@Localizer["Особисті дані"]</h1>
         </div>
 
         @if (TempData.ContainsKey("SuccessMessage"))
@@ -27,24 +31,24 @@
         {
             <div class="personalinfo__form">
                 <div class="personalinfo__form-block">
-                    <span>Прізвище:</span>
-                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="Прізвище" value="@(user.LastName != null ? user.LastName : "")" />
+                    <span>@Localizer["Прізвище"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="@Localizer["Прізвище"]" value="@(user.LastName != null ? user.LastName : "")" />
                 </div>
                 <div class="personalinfo__form-block">
-                    <span>Ім'я:</span>
-                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="Ім'я" value="@(user.FirstName != null ? user.FirstName : "")" />
+                    <span>@Localizer["Ім'я"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="@Localizer["Ім'я"]" value="@(user.FirstName != null ? user.FirstName : "")" />
                 </div>
             </div>
 
             <div class="personalinfo__form">
                 <div class="personalinfo__form-block">
-                    <span>Місто:</span>
-                    <input class="personalinfo__form-input" type="text" name="City" placeholder="Місто" value="@(user.City != null ? user.City : "")">
+                    <span>@Localizer["Місто"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="City" placeholder="@Localizer["Місто"]" value="@(user.City != null ? user.City : "")">
                 </div>
 
                 <div class="personalinfo__form-block">
-                    <span>Дата народження:</span>
-                    <input class="personalinfo__form-input" type="date" name="BirthDate" value="@(user.BirthDate != null ? user.BirthDate.ToString("yyyy-MM-dd") : "")">
+                    <span>@Localizer["Дата народження"]:</span>
+                    <input class="personalinfo__form-input" type="date" name="@Localizer["Дата народження"]" value="@(user.BirthDate != null ? user.BirthDate.ToString("yyyy-MM-dd") : "")">
                 </div>
             </div>
 
@@ -54,28 +58,28 @@
         {
             <div class="personalinfo__form">
                 <div class="personalinfo__form-block">
-                    <span>Прізвище:</span>
-                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="Прізвище" />
+                    <span>@Localizer["Прізвище"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="Lastname" placeholder="@Localizer["Прізвище"]" />
                 </div>
                 <div class="personalinfo__form-block">
-                    <span>Ім'я:</span>
-                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="Ім'я" />
+                    <span>@Localizer["Ім'я"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="Firstname" placeholder="@Localizer["Ім'я"]" />
                 </div>
             </div>
 
             <div class="personalinfo__form">
                 <div class="personalinfo__form-block">
-                    <span>Місто:</span>
-                    <input class="personalinfo__form-input" type="text" name="City" placeholder="Місто">
+                    <span>@Localizer["Місто"]:</span>
+                    <input class="personalinfo__form-input" type="text" name="City" placeholder="@Localizer["Місто"]">
                 </div>
 
                 <div class="personalinfo__form-block">
-                    <span>Дата народження:</span>
+                    <span>@Localizer["Дата народження"]:</span>
                     <input class="personalinfo__form-input" type="date" name="BirthDate">
                 </div>
             </div>
 
-            <button type="submit" class="personalinfo__button">Зберегти</button>
+            <button type="submit" class="personalinfo__button">@Localizer["Зберегти"]</button>
         }    
     </form>
 </div>

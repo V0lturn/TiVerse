@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography.Xml;
+using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRepositoryInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
 using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
+using TiVerse.WebUI.CityLocalizer;
 using TiVerse.WebUI.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TiVerse.WebUI.Controllers
 {
@@ -17,14 +22,17 @@ namespace TiVerse.WebUI.Controllers
         private readonly IAccountService _accountService;
         private readonly IRouteService _routeService;
         private readonly ITiVerseIRepository<Account> _accountRepository;
+        private readonly IMapper _mapper;
+        private readonly ICityLocalization _cityLocalization;
 
-        
         public AccountController(IAccountService accountService, ITiVerseIRepository<Account> accountRepository,
-            IRouteService routeService)
+            IRouteService routeService, IMapper mapper, ICityLocalization cityLocalization)
         {
             _accountService = accountService;
             _accountRepository = accountRepository;
             _routeService = routeService;
+            _mapper = mapper;
+            _cityLocalization = cityLocalization;
         }
 
         public async Task<IActionResult> IndexAsync()
@@ -48,12 +56,22 @@ namespace TiVerse.WebUI.Controllers
 
             if (viewName == "_PlannedTrip")
             {
-                ViewData["PlannedTrip"] = await _accountService.GetUserPlannedTrips(userId);
+                var routes = await _accountService.GetUserPlannedTrips(userId);
+                var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
+
+                var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+                ViewData["PlannedTrip"] = localizedRoutes;
             }
 
             if (viewName == "_TripHistory")
             {
-                ViewData["TripHistory"] = await _accountService.GetUserTripHistory(userId);
+                var routes = await _accountService.GetUserTripHistory(userId);
+                var routesToDTO = _mapper.Map<List<RouteDTO>>(routes);
+
+                var localizedRoutes = _cityLocalization.GetLocalizedList(routesToDTO);
+
+                ViewData["TripHistory"] = localizedRoutes;
             }
 
             if (viewName == "_AccountBalance")

@@ -1,31 +1,34 @@
-﻿<div class="route-container__item" id="routeContainer">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<div class="route-container__item" id="routeContainer">
     @foreach (var item in Model)
     {
         <div class="route-block" tripId="@item.TripID">
             <div class="route-block__details">
-                <span>З міста:</span>
+                <span>@Localizer["З міста"]:</span>
                 <span class="route-block__details-text">@item.DeparturePoint</span>
             </div>
             <div class="route-block__details">
-                <span>В місто:</span>
+                <span>@Localizer["В місто"]:</span>
                 <span class="route-block__details-text">@item.DestinationPoint</span>
             </div>
             <div class="route-block__details">
-                <span>Дата відправки:</span>
+                <span>@Localizer["Дата відправки"]:</span>
                 <span class="route-block__details-text">@item.Date</span>
             </div>
             <div class="route-block__details">
-                <span>Кількість місць:</span>
+                <span>@Localizer["Кількість місць"]:</span>
                 <span class="route-block__details-text">@item.Places</span>
             </div>
 
             <div class="route-block__details">
                 <button class="route-block__details-buylink" onclick="buyTicket('@item.TripID')">
-                    <span>купити за</span>
+                    <span>@Localizer["купити за"]</span>
                     <span class="route-block__details-text">@item.TicketCost  &#8372</span>
                 </button>
             </div>
-
         </div>
     }
 </div>
