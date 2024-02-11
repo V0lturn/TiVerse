@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "_SiteLayout";
+}
+
+@using TiVerse.WebUI.Models;
+@model PaymentViewModel
+
+<h1>Оплата</h1>
+
+<div class="row g-5">
+    <div class="col-md-6">
+        <ul class="icon-list ps-0">
+            <li class="text-muted d-flex align-items-start mb-1">До сплати: @Model.PaymentParams.Amount @Model.PaymentParams.Currency</li>
+        </ul>
+        @Html.Raw(Model.FormCode)
+    </div>
+</div>

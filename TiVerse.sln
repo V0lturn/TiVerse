@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Shared", "TiVerse.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.WebUI", "TiVerse.WebUI\TiVerse.WebUI.csproj", "{3479A934-384F-4F16-8ED5-F40772F6A9FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.Api", "TiVerse.Api\TiVerse.Api.csproj", "{550D8978-C55A-4504-ACB5-EACB3E4136F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.Api", "TiVerse.Api\TiVerse.Api.csproj", "{550D8978-C55A-4504-ACB5-EACB3E4136F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiVerse.IdentityServer", "TiVerse.IdentityServer\TiVerse.IdentityServer.csproj", "{95AC673F-67F2-4E64-890A-A967269B050A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiVerse.IdentityServer", "TiVerse.IdentityServer\TiVerse.IdentityServer.csproj", "{95AC673F-67F2-4E64-890A-A967269B050A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

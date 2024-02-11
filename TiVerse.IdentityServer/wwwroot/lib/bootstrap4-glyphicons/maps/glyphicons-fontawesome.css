@@ -1886,7 +1886,8 @@
 .fa-android::before {
   content: "\f17b";
 }
-.fa-linux::before {
+.fa-
+::before {
   content: "\f17c";
 }
 .fa-dribbble::before {

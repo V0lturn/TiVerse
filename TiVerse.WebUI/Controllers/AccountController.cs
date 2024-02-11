@@ -1,18 +1,20 @@
 ﻿using AutoMapper;
+using LiqPay.SDK;
+using LiqPay.SDK.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using System.Security.Cryptography.Xml;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using TiVerse.Application.DTO;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRepositoryInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
-using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
 using TiVerse.WebUI.CityLocalizer;
+using TiVerse.WebUI.Models;
 using TiVerse.WebUI.ViewModels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TiVerse.WebUI.Controllers
 {
@@ -24,15 +26,18 @@ namespace TiVerse.WebUI.Controllers
         private readonly ITiVerseIRepository<Account> _accountRepository;
         private readonly IMapper _mapper;
         private readonly ICityLocalization _cityLocalization;
+        private readonly IConfiguration _config;
 
         public AccountController(IAccountService accountService, ITiVerseIRepository<Account> accountRepository,
-            IRouteService routeService, IMapper mapper, ICityLocalization cityLocalization)
+            IRouteService routeService, IMapper mapper, ICityLocalization cityLocalization,
+            IConfiguration config)
         {
             _accountService = accountService;
             _accountRepository = accountRepository;
             _routeService = routeService;
             _mapper = mapper;
             _cityLocalization = cityLocalization;
+            _config = config;
         }
 
         public async Task<IActionResult> IndexAsync()
@@ -131,23 +136,85 @@ namespace TiVerse.WebUI.Controllers
             }
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> TopUpBalance(decimal topUpAmount)
+        //{
+        //    string userId = HttpContext.User.FindFirst("sub")?.Value;
+
+        //    var result = await _accountService.UpdateUserBalance(topUpAmount, userId);
+
+        //    if (result.success)
+        //    {
+        //        TempData["SuccessMessage"] = result.message;
+        //    }
+        //    else
+        //    {
+        //        TempData["ErrorMessage"] = result.message;
+
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
+
         [HttpPost]
-        public async Task<IActionResult> TopUpBalance(decimal topUpAmount)
+        public ActionResult Pay([FromServices] IConfiguration config, decimal topUpAmount)
         {
-            string userId = HttpContext.User.FindFirst("sub")?.Value;
+            string publicKey = _config["LiqpayApi:PublicKey"];
+            string privateKey = _config["LiqpayApi:PrivateKey"];
 
-            var result = await _accountService.UpdateUserBalance(topUpAmount, userId);
+            LiqPayClient liqpay = new LiqPayClient(publicKey, privateKey);
 
-            if (result.success)
+            //Payment parameters
+            var paymentParams = new LiqPayRequest
             {
-                TempData["SuccessMessage"] = result.message;
-            }
-            else
-            {
-                TempData["ErrorMessage"] = result.message;
+                Version = 3, //Версия Api
+                Action = LiqPay.SDK.Dto.Enums.LiqPayRequestAction.Pay, //Transaction type
+                Amount = (double)topUpAmount, //Payment amount
+                Currency = "UAH", //Payment currency
+                Description = "Поповнення балансу", //Payment Description 
+                OrderId = Guid.NewGuid().ToString(), //Unique order number on your website
+                ResultUrl = "https://localhost:5002/account/success" //Link to successful payment page
+            };
 
-            }
-            return RedirectToAction("Index"); 
+            var formCode = liqpay.CNBForm(paymentParams);
+
+            PaymentViewModel pvm = new PaymentViewModel
+            {
+                PaymentParams = paymentParams,
+                FormCode = formCode,
+            };
+
+            return View(pvm);
+        }
+
+        private string GetLiqPaySignature(string data)
+        {
+            string privateKey = _config["LiqpayApi:PrivateKey"];
+            return Convert.ToBase64String(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(privateKey + data + privateKey)));
+        }
+
+        public IActionResult Success([FromForm] IFormCollection form)
+        {
+            //var request_dictionary = form.Keys.ToDictionary(key => key, key => form[key].ToString());
+
+            //// --- Розшифровую параметр data відповіді LiqPay та перетворюю в Dictionary<string, string> для зручності:
+            //byte[] request_data = Convert.FromBase64String(request_dictionary["data"]);
+            //string decodedString = Encoding.UTF8.GetString(request_data);
+            //var request_data_dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(decodedString);
+
+            //// --- Отримую сигнатуру для перевірки
+            //var mySignature = GetLiqPaySignature(request_dictionary["data"]);
+
+            //// --- Якщо сигнатура сервера не співпадає з сигнатурою відповіді LiqPay - щось пішло не так
+            //if (request_data_dictionary["status"] == "sandbox" || request_data_dictionary["status"] == "success")
+            //{
+            //    // Тут можна оновити статус замовлення та зробити всі необхідні речі. Id замовлення можна взяти тут: request_data_dictionary[order_id]
+            //    // ...
+
+            //    return View();
+            //}
+
+            return View();
         }
 
     }

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tiverse.webui:
+    image: ${DOCKER_REGISTRY-}tiversewebui
+    build:
+      context: .
+      dockerfile: TiVerse.WebUI/Dockerfile
