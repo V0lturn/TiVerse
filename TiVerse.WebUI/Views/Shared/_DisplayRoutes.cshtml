@@ -29,6 +29,21 @@
                     <span class="route-block__details-text">@item.TicketCost  &#8372</span>
                 </button>
             </div>
+
+           @if (User.Identity.IsAuthenticated)
+           {
+                <div class="route-block__details">
+                    <button class="change" onclick="buyTicket('@item.TripID')">
+                        <span>@Localizer["змінити"]</span>
+                    </button>
+                </div>
+
+                <div class="route-block__details">
+                    <button class="delete" onclick="deleteRoute('@item.TripID')">
+                        <span>@Localizer["видалити"]</span>
+                    </button>
+                </div>
+           }
         </div>
     }
 </div>
@@ -47,6 +62,23 @@
             },
             error: function () {
                 console.log('Error buying ticket.');
+            }
+        });
+    }
+
+    function deleteRoute(tripId) {
+     console.log(tripId);
+            $.ajax({
+            url: '/MainPage/DeleteRoute',
+            type: 'DELETE',
+            data: { tripId: tripId },
+            success: function (response) {
+                console.log('delete successfully');
+                $(".messages").html(response.message);
+                location.reload();
+            },
+            error: function () {
+                console.log('Error deleting route.');
             }
         });
     }

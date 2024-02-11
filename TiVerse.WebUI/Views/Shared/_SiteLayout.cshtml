@@ -58,6 +58,10 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <a asp-controller="MainPage" asp-action="RedirectToAddRoute">
+                                <div class="second-section__text">Додати</div>
+                            </a>
+
                             <a asp-controller="Account" asp-action="Index">
                                 <div class="second-section__balance">@ViewData["UserBalance"]  &#8372</div>
                                 <div class="second-section__icon">
@@ -111,6 +115,9 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.9/signalr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
         var maxPrice = @maxPrice;

@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,14 @@ namespace WebClient.Pages
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync("https://localhost:6001/identity");
+            var content = await client.GetStringAsync("https://localhost:6001/routes");
 
             var parsed = JsonDocument.Parse(content);
-            var formatted = JsonSerializer.Serialize(parsed, new JsonSerializerOptions { WriteIndented = true });
+            var formatted = JsonSerializer.Serialize(parsed, new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
 
             Json = formatted;
         }

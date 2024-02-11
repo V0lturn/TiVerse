@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "_SiteLayout";
+}
+
+
+@model TiVerse.Application.ViewModels.RouteViewModel
+
+<div class="personalinfo">
+    @if (TempData.ContainsKey("SuccessMessage"))
+    {
+        <div class="alert alert-success">
+            <h2>@TempData["SuccessMessage"]</h2>
+        </div>
+    }
+
+    @if (TempData.ContainsKey("ErrorMessage"))
+    {
+        <div class="alert alert-danger">
+            <h2>@TempData["ErrorMessage"]</h2>
+        </div>
+    }
+
+    <form asp-controller="MainPage" asp-action="AddRoute" method="post">
+        <div>
+            <h1 class="personalinfo__header">Додати новий маршрут</h1>
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="DeparturePoint">Місто відправки:</label>
+            <input asp-for="DeparturePoint" class="personalinfo__form-input" />
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="DestinationPoint">Місто прибуття:</label>
+            <input asp-for="DestinationPoint" class="personalinfo__form-input" />
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="DateOfTrip">Дата поїздки:</label>
+            <input asp-for="DateOfTrip" type="date" class="personalinfo__form-input" />
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="Transport">Транспорт:</label>
+            <select asp-for="Transport" class="personalinfo__form-input">
+                <option value="Bus">Автобус</option>
+                <option value="Train">Поїзд</option>
+                <option value="Plane">Літак</option>
+            </select>
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="Company">Компанія:</label>
+            <input asp-for="Company" class="personalinfo__form-input" />
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="Places">Кількість місць:</label>
+            <input asp-for="Places" type="number" class="personalinfo__form-input" />
+        </div>
+
+        <div class="personalinfo__form-block">
+            <label asp-for="TicketCost">Ціна:</label>
+            <input asp-for="TicketCost" type="number" class="personalinfo__form-input" />
+        </div>
+
+        <button type="submit" class="personalinfo__button">Підтвердити</button>
+    </form>
+</div>
+
+<script src="~/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.9/signalr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

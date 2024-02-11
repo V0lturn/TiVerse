@@ -4,11 +4,17 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using TiVerse.Application.DTO;
+using TiVerse.Application.Hubs;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
+using TiVerse.Application.ViewModels;
 using TiVerse.WebUI.CityLocalizer;
 
 namespace TiVerse.WebUI.Controllers
@@ -19,13 +25,19 @@ namespace TiVerse.WebUI.Controllers
         private readonly IMapper _mapper;
         private readonly IRouteService _routeService;
         private readonly ICityLocalization _cityLocalization;
+        private readonly IHubContext<MessageHub> _hubContext;
+        private readonly HttpClient _httpClient;
+        
+        private readonly Uri ApiUrl = new Uri("https://localhost:6001/routes");
 
         public MainPageController(IMapper mapper, IRouteService routeService,
-            ICityLocalization cityLocalization)
+            ICityLocalization cityLocalization, IHubContext<MessageHub> hubContext)
         {
             _mapper = mapper;
             _routeService = routeService;
             _cityLocalization = cityLocalization;
+            _httpClient = new HttpClient();
+            _hubContext = hubContext;
         }
 
         public async Task<IActionResult> Index()
@@ -106,5 +118,71 @@ namespace TiVerse.WebUI.Controllers
             return Ok(new { success = true });
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteRoute(Guid tripId)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                return RedirectToPage("/CallApi");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"{ApiUrl}/{tripId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok("Route deleted successfully");
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return NotFound($"Route with ID {tripId} not found");
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode, $"An error occurred: {response.ReasonPhrase}");
+            }
+        }
+
+        public IActionResult RedirectToAddRoute()
+        {
+            return View("AddRoute");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRoute(RouteViewModel routeModel)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                return RedirectToPage("/CallApi");
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                var jsonContent = JsonConvert.SerializeObject(routeModel);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PostAsync(ApiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    await _hubContext.Clients.All.SendAsync("MessageCreated", routeModel);
+                    TempData["SuccessMessage"] = "Нову поїздку додано успішно";
+                    return View("AddRoute");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Помилка при додавнні нового маршруту";
+                    return View("AddRoute");
+                }
+            }
+        }
     }
 }

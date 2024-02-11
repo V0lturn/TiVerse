@@ -192,4 +192,21 @@
             }
         });
     });
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/messagehub")
+        .build();
+
+    connection.on("MessageCreated", function (model) {
+        console.log("Новий маршрут створений");
+        toastr.success("Новий маршрут створений");
+    });
+
+    connection.start()
+        .then(function () {
+            console.log("Подключение к SignalR установлено.");
+        })
+        .catch(function (err) {
+            console.error("Ошибка при подключении к SignalR:", err.toString());
+        });
 });

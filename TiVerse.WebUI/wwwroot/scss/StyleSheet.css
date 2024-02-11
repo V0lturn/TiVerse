@@ -438,6 +438,38 @@ a {
   filter: brightness(90%);
 }
 
+.delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  width: 150px;
+  max-height: 80px;
+}
+.delete:hover {
+  filter: brightness(90%);
+}
+
+.change {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: white;
+  background-color: lightblue;
+  border-radius: 5px;
+  width: 150px;
+  max-height: 80px;
+}
+.change:hover {
+  filter: brightness(90%);
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -1,7 +1,10 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using TiVerse.Application.Data;
+using TiVerse.Application.Hubs;
 using TiVerse.Application.Interfaces.IAccountServiceInterface;
 using TiVerse.Application.Interfaces.IRepositoryInterface;
 using TiVerse.Application.Interfaces.IRouteServiceInterface;
@@ -9,10 +12,6 @@ using TiVerse.Application.Services;
 using TiVerse.Application.UseCase;
 using TiVerse.Core.Entity;
 using TiVerse.Infrastructure.AppDbContext;
-using TiVerse.Infrastructure.IndentityDbContext;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 using TiVerse.WebUI.CityLocalizer;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +32,6 @@ builder.Services.AddScoped<ITiVerseIRepository<Account>, TiVerseRepository<Accou
 builder.Services.AddScoped<ITiVerseIRepository<Trip>, TiVerseRepository<Trip>>();
 builder.Services.AddScoped<ITiVerseIRepository<UserRouteHistory>, TiVerseRepository<UserRouteHistory>>();
 builder.Services.AddScoped<ICityLocalization, CityLocalization>();
-
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -95,6 +93,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 app.UseRequestLocalization();
@@ -121,6 +121,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=MainPage}/{action=Index}/{id?}");
+    endpoints.MapHub<MessageHub>("/messagehub");
 });
 
 app.Run();

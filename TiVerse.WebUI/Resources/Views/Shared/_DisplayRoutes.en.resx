@@ -120,11 +120,17 @@
   <data name="В місто" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="видалити" xml:space="preserve">
+    <value>delete</value>
+  </data>
   <data name="Дата відправки" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="З міста" xml:space="preserve">
     <value>From</value>
+  </data>
+  <data name="змінити" xml:space="preserve">
+    <value>change</value>
   </data>
   <data name="Кількість місць" xml:space="preserve">
     <value>Places</value>

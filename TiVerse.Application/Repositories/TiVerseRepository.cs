@@ -15,7 +15,7 @@ namespace TiVerse.Application.Data
 
         public IQueryable<T> GetAll<T>() where T : class
         {
-            return _dbContext.Set<T>().AsQueryable();
+            return _dbContext.Set<T>();
         }
 
         public async Task<T> GetById<T>(object id) where T : class
