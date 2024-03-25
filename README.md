@@ -14,10 +14,10 @@ ___
 
 ___
 
-### The project was built based on clean architecture. 
-### It is based on an asp.net mvc application.
-### An Entity Framework was used to work with the database.
-### Authentication, authorization and registration were done using Duende identity.
-### Notification when adding a new route was done using SignalR.
-### An API has also been added to which only an authorized user can access. Verified using access token.
+#### The project was built based on clean architecture. 
+#### It is based on an asp.net mvc application.
+#### An Entity Framework was used to work with the database.
+#### Authentication, authorization and registration were done using Duende identity.
+#### Notification when adding a new route was done using SignalR.
+#### An API has also been added to which only an authorized user can access. Verified using access token.
 
