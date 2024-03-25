@@ -20,11 +20,3 @@ ___
 #### Authentication, authorization and registration were done using Duende identity.
 #### Notification when adding a new route was done using SignalR.
 #### An API has also been added to which only an authorized user can access. Verified using access token.
-
-___
-* Main page
-![image](https://github.com/V0lturn/TiVerse/assets/71771539/7b1d02c1-0c7b-49ca-8a8b-e7536dc5320f)
-
-* Routes with filters
-![image](https://github.com/V0lturn/TiVerse/assets/71771539/3515b366-e2a5-429a-9d78-c003df2eaa70)
-
