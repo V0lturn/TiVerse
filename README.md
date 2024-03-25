@@ -1,20 +1,23 @@
 # TiVerse - buy tickets for almost any type of transport
+* A website for purchasing tickets for different modes of transport
 ___
 
 ## Features
-* View bus/rail/air routes between cities/countries
 * Search for a route and display transport for a given route
-* Add a filter for trips from the selected city
-* Add filter by price
-* If there is no train/airport in the city, find route using a bus/train to the nearest city with an airport/train
-* If the route is international, show a list of required documents
-* (not yet sure) Make a function to create a user trip by car to another city (like blablacar)
-  
-### Create a user account with these features:
-   * Display user's travel history
-   * Display of user's planned trips
-   * Ticket refund
-   * Repeat the most usable route for the user
-   * Track planned trips
+* The main page displays the most popular routes
+* View bus/rail/air routes between cities/countries
+* Viewing routes with specified filter parameters
+* A user profile in which you can add information, view planned trips, trip history and top up your account balance
+* Adding and deleting routes
+* Localization for Ukrainian and English
+* Notify all users when a new route is added
 
+___
+
+The project was built based on clean architecture. 
+It is based on an asp.net mvc application.
+An Entity Framework was used to work with the database.
+Authentication, authorization and registration were done using Duende identity.
+Notification when adding a new route was done using SignalR.
+An API has also been added to which only an authorized user can access. Verified using access token.
 
